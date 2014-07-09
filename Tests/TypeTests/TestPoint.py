@@ -1,13 +1,13 @@
 """
 Tests the Point module
 
-Created: SbSpider rajshorya@gmail.com
+.. moduleauthor: SbSpider rajshorya@gmail.com
 """
 
 from datetime import datetime
 from nose.tools import *
 
-from Types import Point
+from Core.Types import Point
 
 class Test_PointInitialization:
 	"""
