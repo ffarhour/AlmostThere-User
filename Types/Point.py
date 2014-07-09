@@ -1,39 +1,83 @@
 """
+.. module:: Core.Types.Point
+.. moduleauthor:: Spider rajshorya@gmail.com
 
-.. module: Point
-.. moduleauthor: SbSpider rajshorya@gmail.com
+The Point type is the primary workhorse for the system. Point contains the specification of what a Point
+should be like. A Point is what is sent from a Client Device, allowing for tracking to occur. It is stored 
+in a Database on the Sentinel (there, it's created by storing values in the database, as opposed to pickling 
+this, as pickling is probably not ideal for allowing things like search).
 
-This module contains the code for the operation of the Point class
 """
 
 from datetime import datetime
 
 class Point:
 	"""
-	The point class, a standard means by which to transmit Point data throughout our application
-	
-	Params
+	The Point class, for storing Point data.
 
-	DeviceID - The deviceid that logged the point
-	Latitude - The Latitude of the point inserted
-	Longitude - The Longitude of the point inserted
-	DateTime - The DateTime at which the point was inserted
+	Default values are specified, in case a point is needed to be created and its values put in later
 
-		All of the parameters are optional, as in some cases it may make more sense to set them at a later time
+	:arg int DeviceID: The DeviceID, default is 0
+	:arg float Latitude: The Latitude, default is 0
+	:arg float Longitude: The Longitude, default is 0
+	:arg datetime.datetime DateTime: The DateTime, default is now. Ideally should be
+			datetime.datetime, but if specified as a useable string type, then
+			constructor will automatically parse it.
 	"""
 
-	def __init__(self, DeviceID = 0, Latitude = 0, Longitude = 0, DateTime = None):
+	def __init__(self, DeviceID = 0, Latitude = 0, Longitude = 0, DateTime =  None):
 		"""
+			Initializes a Point.
+
+			DeviceID - optional, the id of the device that made the ping
+			Latitutde - optional, the latitude of the ping
+			Longitude - optional, the longitude of the ping
+			DateTime - optional, the Date and Time at which the ping was made
 		"""
 
-		self.DeviceID = int(DeviceID)
-		self.Latitude = float(Latitude)
-		self.Longitude = float(Longitude)
+		
+		try:
+			self.DeviceID = int(DeviceID)
+			self.Latitude = float(Latitude)
+			self.Longitude = float(Longitude)
+		except:
+			raise Exception("Unable to parse details")
 
 		if DateTime == None:
 			self.DateTime = datetime.now()
 		else:
-			if type(DateTime) == datetime:
+			if type(DateTime) is datetime:
 				self.DateTime = DateTime
 			else:
-				raise ValueError("DateTime is not of type datetime or parseable")
+				try:
+					self.DateTime = datetime.strptime(DateTime, "%Y-%m-%d %H:%M:%S.%f")
+				except:
+					self.DateTime = datetime.strptime(DateTime, "%Y-%m-%d %H:%M:%S")
+	
+	def __eq__(self, other):
+		"""
+		Tries to see if equal
+		"""
+		if other == None:
+			return False
+
+		if self.DeviceID == other.DeviceID:
+			if self.Latitude == other.Latitude:
+				if self.Longitude == other.Longitude:
+					if self.DateTime == other.DateTime:
+						return True
+		
+		return False
+
+	def __nq__(self, other):
+		if other == None:
+			return True
+
+		if self.DeviceID == other.DeviceID:
+			if self.Latitude == other.Latitude:
+				if self.Longitude == other.Longitude:
+					if self.DateTime == other.DateTime:
+						return False
+		
+		return True
+
