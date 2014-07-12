@@ -36,28 +36,28 @@ class Test_PointInitialization:
 
 		assert_equals(point.DateTime, time)
 
-	@raises(ValueError)
+	@raises(Exception)
 	def Test_ExceptionThrownWhenWrongInput_DeviceID(self):
 		"""
 		Tests if an error is given if the DeviceID is not an integer
 		"""
 		point = Point(DeviceID = 'asd')
 
-	@raises(ValueError)
+	@raises(Exception)
 	def Test_ExceptionThrownWhenWrongInput_Latitude(self):
 		"""
 		TEsts if an error is given if the Latitude is not a float
 		"""
 		point = Point(Latitude = 'asd')
 
-	@raises(ValueError)
+	@raises(Exception)
 	def Test_ExceptionThrownWhenWrongInput_Longitude(self):
 		"""
 		Tests if an error is given if the Longitude is not a float
 		"""
 		point = Point(Longitude = 'asd')
 
-	@raises(ValueError)
+	@raises(Exception)
 	def Test_ExceptionThrownWhenWrongInput_DateTime(self):
 		"""
 		Tests if an error is given if the DateTime is not parseable
