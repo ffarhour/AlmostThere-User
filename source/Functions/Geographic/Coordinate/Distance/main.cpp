@@ -69,5 +69,5 @@ PyMODINIT_FUNC PyInit_Distance(void){
 // ===================================
 
 double Degree2Radian(double degree){
-	return degree * (3.1415926535897 / 180);
+	return degree * (3.14159265359 / 180);
 }
