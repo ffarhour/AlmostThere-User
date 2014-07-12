@@ -1,8 +1,10 @@
 /*
-	Distance.cpp
+Distance.cpp
 
-	Distance functions
-	*/
+Distance functions
+*/
+
+#include <math.h>
 
 #ifdef _DEBUG
 #define DEBUG_WAS_DEFINED
@@ -15,8 +17,6 @@
 #define _DEBUG 1
 #undef DEBUG_WAS_DEFINED
 #endif
-
-#include <math.h>
 
 double Degree2Radian(double);
 
@@ -47,21 +47,21 @@ static PyObject * Calculate_Distance_Between_Latitude_And_Longitude(PyObject * s
 	return PyFloat_FromDouble(d);
 }
 
-static PyMethodDef CoordinateMethods[] = {
-		{ "Calculate_Distance_Between_Latitude_And_Longitude", Calculate_Distance_Between_Latitude_And_Longitude, METH_VARARGS, "Returns the distance between two sets off latitude and longitude points. Parameters: Lat1, Long1, Lat2, Long2" },
+static PyMethodDef DistanceMethods[] = {
+		{ "Distance_LatLongs", Calculate_Distance_Between_Latitude_And_Longitude, METH_VARARGS, "Returns the distance between two sets off latitude and longitude points. Parameters: Lat1, Long1, Lat2, Long2" },
 		{ NULL, NULL, 0, NULL }
 };
 
-static struct PyModuleDef CoordinateModule = {
+static struct PyModuleDef DistanceModule = {
 	PyModuleDef_HEAD_INIT,
 	"Coordinate",
 	NULL,
 	-1,
-	CoordinateMethods
+	DistanceMethods
 };
 
-PyMODINIT_FUNC PyInit_Coordinate(void){
-	return PyModule_Create(&CoordinateModule);
+PyMODINIT_FUNC PyInit_Distance(void){
+	return PyModule_Create(&DistanceModule);
 }
 
 // ===================================
