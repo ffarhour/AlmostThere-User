@@ -1,9 +1,8 @@
+import unittest
+
 """
 Tests the Functions.Geographic.Coordinate module
 """
-
-from nose.tools import *
-import unittest
 
 from Core.Functions.Geographic.Coordinate import Angle_LatLongs_And_Vertical
 
@@ -12,7 +11,7 @@ class Test_Angle_LatLongs_And_Vertical(unittest.TestCase):
 	Tests the Angle_LatLongs_And_Vertical
 	"""
 
-	def Test_180Angle(self):
+	def test_180Angle(self):
 
 		lat1 = 1
 		long1 = 1
@@ -26,7 +25,7 @@ class Test_Angle_LatLongs_And_Vertical(unittest.TestCase):
 
 		self.assertEqual(actual, expected)
 
-	def Test_270Angle(self):
+	def test_270Angle(self):
 
 		lat1 = 1
 		long1 = 1
@@ -40,7 +39,7 @@ class Test_Angle_LatLongs_And_Vertical(unittest.TestCase):
 
 		self.assertEqual(actual, expected)
 
-	def Test_90Angle(self):
+	def test_90Angle(self):
 
 		lat1 = 1
 		long1 = 1
@@ -53,3 +52,6 @@ class Test_Angle_LatLongs_And_Vertical(unittest.TestCase):
 		actual = Angle_LatLongs_And_Vertical(lat1, long1, lat2, long2)
 
 		self.assertEqual(actual, expected)
+
+if __name__ == '__main__':
+    unittest.main()
