@@ -7,6 +7,10 @@
     <IncludePath>C:\Python34\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Python34\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

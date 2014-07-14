@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Geographic", "Geographic", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Coordinate", "Functions\Geographic\Coordinate\Coordinate.vcxproj", "{16C47C06-05D8-4DB9-A453-CBC5533F6032}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Types", "Types", "{769ED8B1-B108-47DA-833A-D27701416CE0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Predictor", "Types\Predictor\Predictor.vcxproj", "{D652FB66-FF23-4861-9C13-42987D8D2337}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -19,6 +23,10 @@ Global
 		{16C47C06-05D8-4DB9-A453-CBC5533F6032}.Debug|x64.Build.0 = Debug|x64
 		{16C47C06-05D8-4DB9-A453-CBC5533F6032}.Release|x64.ActiveCfg = Release|x64
 		{16C47C06-05D8-4DB9-A453-CBC5533F6032}.Release|x64.Build.0 = Release|x64
+		{D652FB66-FF23-4861-9C13-42987D8D2337}.Debug|x64.ActiveCfg = Debug|x64
+		{D652FB66-FF23-4861-9C13-42987D8D2337}.Debug|x64.Build.0 = Debug|x64
+		{D652FB66-FF23-4861-9C13-42987D8D2337}.Release|x64.ActiveCfg = Release|x64
+		{D652FB66-FF23-4861-9C13-42987D8D2337}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,5 +34,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EAD5513D-8402-4419-B937-B33F9E702C7F} = {A061BD2E-9458-470F-B4F6-B8C6DFBA1203}
 		{16C47C06-05D8-4DB9-A453-CBC5533F6032} = {EAD5513D-8402-4419-B937-B33F9E702C7F}
+		{D652FB66-FF23-4861-9C13-42987D8D2337} = {769ED8B1-B108-47DA-833A-D27701416CE0}
 	EndGlobalSection
 EndGlobal
