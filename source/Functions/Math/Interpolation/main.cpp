@@ -8,6 +8,7 @@
 
 static PyMethodDef InterpolationMethods[] = {
 		{ "Interpolate_Linear", Interpolate_Linear, METH_VARARGS, "Performs a linear interpolation" },
+		{ "Interpolate_Linear_3Points", Interpolate_Linear_3Points, METH_VARARGS, "3d point linear interpolation" },
 		{ NULL, NULL, 0, NULL }
 };
 

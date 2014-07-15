@@ -7,6 +7,9 @@ extern "C"{
 
 	// Python Functions
 	PyObject * Interpolate_Linear(PyObject * self, PyObject * args);
+	PyObject * Interpolate_Linear_3Points(PyObject * self, PyObject * args);
+
+	double * Linear_Interpolate_3Points(double x0, double y0, double z0, double x1, double y1, double z1, double d);
 
 #define Linear_Interpolate_NUM 0
 #define Linear_Interpolate_RETURN double
