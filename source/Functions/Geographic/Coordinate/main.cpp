@@ -35,11 +35,11 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 	PyObject * m;
 
 	// For distance module
-	static void * DISTANCE[DISTANCE_API_pointers];
+	static void * DISTANCE_API[DISTANCE_API_pointers];
 	PyObject * Distance_C_API_OBJECT;
 
 	// For cartesian module
-	static void * CARTESIAN[CARTESIAN_API_pointers];
+	static void * CARTESIAN_API[CARTESIAN_API_pointers];
 	PyObject * Cartesian_C_API_OBJECT;
 
 	m = PyModule_Create(&CoordinateModule);
@@ -47,7 +47,6 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 		return NULL;
 	}
 
-	/*
 	// Distance module init
 	DISTANCE_API[Calculate_Angle_Between_LatLongs_And_Vertical_NUM] = (void *)Calculate_Angle_Between_LatLongs_And_Vertical;
 	DISTANCE_API[Calculate_Distance_Between_LatLongs_NUM] = (void *)Calculate_Distance_Between_LatLongs;
@@ -55,7 +54,7 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 
 	Distance_C_API_OBJECT = PyCapsule_New((void *)DISTANCE_API, "Distance._C_API", NULL);
 	if (Distance_C_API_OBJECT != NULL){
-	PyModule_AddObject(m, "_C_API", Distance_C_API_OBJECT);
+		PyModule_AddObject(m, "_C_API", Distance_C_API_OBJECT);
 	}
 
 	CARTESIAN_API[_ToCartesian_NUM] = (void *)_ToCartesian;
@@ -63,9 +62,8 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 
 	Cartesian_C_API_OBJECT = PyCapsule_New((void *)CARTESIAN_API, "Cartesian._C_API", NULL);
 	if (Cartesian_C_API_OBJECT != NULL){
-	PyModule_AddObject(m, "_C_API", Cartesian_C_API_OBJECT);
+		PyModule_AddObject(m, "_C_API", Cartesian_C_API_OBJECT);
 	}
-	*/
 
 	return m;
 }
