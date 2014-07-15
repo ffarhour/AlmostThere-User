@@ -52,7 +52,7 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 	DISTANCE_API[Calculate_Distance_Between_LatLongs_NUM] = (void *)Calculate_Distance_Between_LatLongs;
 	DISTANCE_API[Degrees_To_Radians_NUM] = (void *)Degrees_To_Radians;
 
-	Distance_C_API_OBJECT = PyCapsule_New((void *)DISTANCE_API, "Distance._C_API", NULL);
+	Distance_C_API_OBJECT = PyCapsule_New((void *)DISTANCE_API, "DISTANCE._C_API", NULL);
 	if (Distance_C_API_OBJECT != NULL){
 		PyModule_AddObject(m, "_C_API", Distance_C_API_OBJECT);
 	}
@@ -60,7 +60,7 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 	CARTESIAN_API[_ToCartesian_NUM] = (void *)_ToCartesian;
 	CARTESIAN_API[_ToGeo_NUM] = (void *)_ToGeo;
 
-	Cartesian_C_API_OBJECT = PyCapsule_New((void *)CARTESIAN_API, "Cartesian._C_API", NULL);
+	Cartesian_C_API_OBJECT = PyCapsule_New((void *)CARTESIAN_API, "CARTESIAN._C_API", NULL);
 	if (Cartesian_C_API_OBJECT != NULL){
 		PyModule_AddObject(m, "_C_API", Cartesian_C_API_OBJECT);
 	}

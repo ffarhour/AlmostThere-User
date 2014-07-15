@@ -40,8 +40,8 @@ extern "C" {
 	static int
 		import_Cartesian(void)
 	{
-		DISTANCE_API = (void **)PyCapsule_Import("Distance._C_API", 0);
-		return (DISTANCE_API != NULL) ? 0 : -1;
+		CARTESIAN_API = (void **)PyCapsule_Import("CARTESIAN._C_API", 0);
+		return (CARTESIAN_API != NULL) ? 0 : -1;
 	}
 
 #endif /* COORDINATE_CARTESIAN_MODULE */

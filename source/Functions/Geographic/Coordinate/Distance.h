@@ -63,7 +63,7 @@ extern "C" {
 	static int
 		import_Distance(void)
 	{
-		DISTANCE_API = (void **)PyCapsule_Import("Distance._C_API", 0);
+		DISTANCE_API = (void **)PyCapsule_Import("DISTANCE._C_API", 0);
 		return (DISTANCE_API != NULL) ? 0 : -1;
 	}
 
