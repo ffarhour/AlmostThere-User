@@ -11,12 +11,15 @@
 #include "stdafx.h"
 
 #include "Distance.h"
+#include "Cartesian.h"
 
 #include <math.h>
 
 static PyMethodDef CoordinateMethods[] = {
 		{ "Angle_LatLongs_And_Vertical", Angle_LatLongs_And_Vertical, METH_VARARGS, "Calculates the angle between two Latitude and Longitude points" },
 		{ "Distance_LatLongs", Distance_LatLongs, METH_VARARGS, "Calculates the distance between two Latitude and Longitude points" },
+		{ "ToCartesian", ToCartesian, METH_VARARGS, "Converts the input latitude and longitude into relevant xyz coordinates" },
+		{ "ToGeo", ToGeo, METH_VARARGS, "Converts cartesian coordinates into geographic ones" },
 		{ NULL, NULL, 0, NULL }
 };
 
@@ -35,6 +38,10 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 	static void * DISTANCE[DISTANCE_API_pointers];
 	PyObject * Distance_C_API_OBJECT;
 
+	// For cartesian module
+	static void * CARTESIAN[CARTESIAN_API_pointers];
+	PyObject * Cartesian_C_API_OBJECT;
+
 	m = PyModule_Create(&CoordinateModule);
 	if (m == NULL){
 		return NULL;
@@ -49,6 +56,14 @@ PyMODINIT_FUNC PyInit_Coordinate(void){
 	Distance_C_API_OBJECT = PyCapsule_New((void *)DISTANCE_API, "Distance._C_API", NULL);
 	if (Distance_C_API_OBJECT != NULL){
 	PyModule_AddObject(m, "_C_API", Distance_C_API_OBJECT);
+	}
+
+	CARTESIAN_API[_ToCartesian_NUM] = (void *)_ToCartesian;
+	CARTESIAN_API[_ToGeo_NUM] = (void *)_ToGeo;
+
+	Cartesian_C_API_OBJECT = PyCapsule_New((void *)CARTESIAN_API, "Cartesian._C_API", NULL);
+	if (Cartesian_C_API_OBJECT != NULL){
+	PyModule_AddObject(m, "_C_API", Cartesian_C_API_OBJECT);
 	}
 	*/
 

@@ -61,7 +61,7 @@ extern "C" {
 	* PyCapsule_Import will set an exception if there's an error.
 	*/
 	static int
-		import_spam(void)
+		import_Distance(void)
 	{
 		DISTANCE_API = (void **)PyCapsule_Import("Distance._C_API", 0);
 		return (DISTANCE_API != NULL) ? 0 : -1;
