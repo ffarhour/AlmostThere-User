@@ -51,30 +51,20 @@ class Test_Predictor_Calculate(unittest.TestCase):
 	"""
 	Tests the calculate function
 	"""
-	def test_A(self):
-		pass
-
-
-class Test_Predictor_Base_Modifier(unittest.TestCase):
-	"""
-	Tests the Modifier_Base function
-	"""
-
 	def setUp(self):
 		self.predictor = Predictor()
-	
-	def test_TwoPoint_CurrentHalfway(self):
-		"""
-		Tests the time calculation between two points, with the object halfway in between
-		"""
+
+	def test_Basic_Calculate(self):
 		speed = 10
 
 		pointA = Point(Latitude = 0, Longitude = 0)
 		pointB = Point(Latitude = 10, Longitude = 10)
 
-		distance = Distance_LatLongs(pointA.Latitude, pointA.Longitude, pointB.Latitude, pointB.Longitude)
-		# As the bus is halfwway betwween the path
-		distance = distance / 2;
+		# We are between A and B
+		currentPosition = Point(Latitude = 5, Longitude = 5)
+
+		distance = Distance_LatLongs(currentPosition.Latitude, currentPosition.Longitude, pointB.Latitude, pointB.Longitude)
+
 		expected = distance / speed;
 
 		self.predictor.SetDestination(pointB)
@@ -87,6 +77,114 @@ class Test_Predictor_Base_Modifier(unittest.TestCase):
 
 		# MidPoint
 		self.predictor.SetCurrentPosition(Point(Latitude = 5, Longitude = 5))
+
+		actual = self.predictor.Calculate(average_speed = speed)
+
+		self.assertEqual(actual, expected)
+		
+
+		
+
+
+class Test_Predictor_InterpolateSection(unittest.TestCase):
+
+	def setUp(self):
+		self.predictor = Predictor()
+
+	def test_Section(self):
+		"""
+		Basic section formation, low resolution
+		"""
+		pointA = Point(Latitude = 0, Longitude = 0)
+		pointB = Point(Latitude = 10,  Longitude = 10)
+
+		resolution = 10
+
+		sections = self.predictor.InterpolateSection(pointA, pointB, resolution)
+
+		for x in range(len(sections)):
+			print(sections[x])
+
+		self.assertEqual(len(sections), 10)
+		
+		# Current accuracy is two within one digit
+		for x in range(len(sections)):
+			self.assertEqual(round(sections[x].Latitude, 1), x)
+			self.assertEqual(round(sections[x].Longitude, 1), x)
+
+
+class Test_Predictor_Base_Modifier(unittest.TestCase):
+	"""
+	Tests the Modifier_Base function
+	"""
+
+	def setUp(self):
+		self.predictor = Predictor()
+	
+	def test_TwoPoint_CurrentHalfway(self):
+		"""
+		Tests the time calculation for two points, with the object halfway in between first two
+		"""
+		speed = 10
+
+		pointA = Point(Latitude = 0, Longitude = 0)
+		pointB = Point(Latitude = 10, Longitude = 10)
+
+		# We are between A and B
+		currentPosition = Point(Latitude = 5, Longitude = 5)
+
+		distance = Distance_LatLongs(currentPosition.Latitude, currentPosition.Longitude, pointB.Latitude, pointB.Longitude)
+
+		expected = distance / speed;
+
+		self.predictor.SetDestination(pointB)
+
+		path = []
+		path.append(pointA)
+		path.append(pointB)
+
+		self.predictor.SetPath(path)
+
+		# MidPoint
+		self.predictor.SetCurrentPosition(Point(Latitude = 5, Longitude = 5))
+
+		actual = self.predictor.Modifier_Base(average_speed = speed)
+
+		self.assertEqual(actual, expected)
+
+	def test_FourPoint_CurrentHalfway(self):
+		"""
+		Tests the time calculation for four points, with the object halfway in between first two
+		"""
+		speed = 10
+
+		pointA = Point(Latitude = 0, Longitude = 0)
+		pointB = Point(Latitude = 10, Longitude = 10)
+		pointC = Point(Latitude = 20, Longitude = 20)
+		pointD = Point(Latitude = 30, Longitude = 30)
+
+		# We are between A and B
+		currentPosition = Point(Latitude = 5, Longitude = 5)
+
+		distance = Distance_LatLongs(currentPosition.Latitude, currentPosition.Longitude, pointB.Latitude, pointB.Longitude)
+
+		distance += Distance_LatLongs(pointB.Latitude, pointB.Longitude, pointC.Latitude, pointC.Longitude)
+		distance += Distance_LatLongs(pointC.Latitude, pointC.Longitude, pointD.Latitude, pointD.Longitude)
+
+		expected = distance / speed;
+
+		self.predictor.SetDestination(pointB)
+
+		path = []
+		path.append(pointA)
+		path.append(pointB)
+		path.append(pointC)
+		path.append(pointD)
+
+		self.predictor.SetPath(path)
+
+		# MidPoint
+		self.predictor.SetCurrentPosition(currentPosition)
 
 		actual = self.predictor.Modifier_Base(average_speed = speed)
 

@@ -2,8 +2,12 @@
 # If set to true, then the native code in _Predictor is loaded
 Native = False
 
+import math
+
 from Core.Types import Point
-from Core.Functions.Geographic.Coordinate import Distance_LatLongs
+
+from Core.Functions.Geographic.Coordinate import Distance_LatLongs, ToGeo, ToCartesian
+from Core.Functions.Math.Interpolation import Interpolate_Linear, Interpolate_Linear_3Points
 
 class Predictor:
 	"""
@@ -22,8 +26,13 @@ class Predictor:
 		# List of all of the previous positions, updated whenever we add a new point	
 		self.previousPositions = []
 
+		# Record of the last point that has been completed by the object
+		self.position_indexInPath = None
+
 		# The predicted arrival time
 		self.prediction = None
+
+		self.average_speed = None
 
 	def SetCurrentPosition(self, point):
 		"""
@@ -57,13 +66,20 @@ class Predictor:
 
 		self.path = path
 
+	def SetSpeed(self, speed):
 		
-	def Calculate(self):
+		self.average_speed = speed
+
+		
+	def Calculate(self, average_speed = None):
 		"""
 		Calculates the time needed to go along the path
 		"""
 		if self.destination == None:
 			raise ValueError("Destination not set")
+
+		if average_speed == None:
+			average_speed = self.average_speed
 
 		if self.path == None:
 			# If not path set, then assumes straight line, taking first point as the current position and the final point as destination
@@ -71,14 +87,14 @@ class Predictor:
 			self.path.append(self.currentPosition)
 			self.path.append(self.destination)
 
-		prediction = self.Modifier_Base()
+		prediction = self.Modifier_Base(average_speed)
 
 		self.prediction = prediction
 
 		return prediction
 
 
-	def Modifier_Base(self, average_speed, path = None, destination = None, currentPosition = None):
+	def Modifier_Base(self, average_speed = None, path = None, destination = None, currentPosition = None):
 		"""
 		The base modifier. This calculates the time based on distance and speed.
 
@@ -97,6 +113,9 @@ class Predictor:
 		The expected time that the bus should take, in hours (as the great-circle formula is calculating the distance in km).
 		"""
 
+		if average_speed == None:
+			average_speed = self.average_speed
+
 		if path == None:
 			path = self.path
 
@@ -108,13 +127,21 @@ class Predictor:
 
 		distance = 0
 
+		index = self.DeterminePath_Index()
+
+		self.position_indexInPath = index
+
 		# First we calculate the distance to travel
-		for x in range(len(path)):
-			# A for loop that loops through all of the points in the path
-			if x == 0:
+		for x in range(index, len(path)):
+		# A for loop that loops through all of the points in the path above the last point that the object was on
+			if x == index:
 				# We are going to calculate the distance between the point and the one before, rather than this point and the one after
 				continue
-
+			if x == index + 1:
+				# if 1 + index, thenw we use the current position
+				distance += Distance_LatLongs(path[x].Latitude, path[x].Longitude, currentPosition.Latitude, currentPosition.Longitude)
+				continue
+	
 			# Calculate the great circle distance between points in the path
 			distance += Distance_LatLongs(path[x].Latitude, path[x].Longitude, path[x-1].Latitude, path[x-1].Longitude)
 
@@ -123,7 +150,84 @@ class Predictor:
 		# returns the time 
 		return timeTaken
 
+	def DeterminePath_Index(self, path = None, currentPosition = None):
+		"""
+		Determines which section of the path that the object is on
+		"""
+		if path == None:
+			path = self.path
 
+		if currentPosition == None:
+			currentPosition = self.currentPosition
+
+		# Lowest distance
+		lowest_d = 0
+		# lowest index
+		lowest_i = 0
+
+		# print(len(path))
+
+		for index in range(len(path)):
+			# print(index)
+			if index == len(path) - 1:
+				# We are interpolating forward
+				break
+			segment = self.InterpolateSection(path[index], path[index + 1])
+
+			lowestDistance = 0
+
+			for x in range(len(segment)):
+				if x == 0:
+					# As required for initial value
+					lowestDistance = Distance_LatLongs(segment[x].Latitude, segment[x].Longitude, currentPosition.Latitude, currentPosition.Longitude)
+					continue
+
+				distance = Distance_LatLongs(segment[x].Latitude, segment[x].Longitude, currentPosition.Latitude, currentPosition.Longitude)
+
+				if distance < lowestDistance:
+					lowestDistance = distance
+
+			if index == 0:
+				lowest_d = lowestDistance
+				lowest_i = index
+			else:
+				if lowestDistance < lowest_d:
+					lowest_d = lowestDistance
+					lowest_i = index
+		
+		return lowest_i
+
+
+
+	def InterpolateSection(self, pointA, pointB, Resolution = 50):
+		"""
+		Interpolates the section of te path.
+		"""
+		if type(pointA) != Point:
+			raise TypeError()
+		if type(pointB) != Point:
+			raise TypeError()
+
+		x0, y0, z0 = ToCartesian(pointA.Latitude, pointA.Longitude)
+		x1, y1, z1 = ToCartesian(pointB.Latitude, pointB.Longitude)
+
+		distance = Distance_LatLongs(pointA.Latitude, pointA.Longitude, pointB.Latitude, pointB.Longitude)
+
+		# distance = math.sqrt(math.pow(x1 - x0, 2) + math.pow(y1 - y0, 2) + math.pow(z1 - z0, 2))
+
+		segment_size = distance / Resolution
+
+		segments = []
+
+		for index in range(Resolution):
+			segment_distance = index * segment_size
+			x, y, z = Interpolate_Linear_3Points(x0, y0, z0, x1, y1, z1, segment_distance)
+
+			lat, lon = ToGeo(x, y, z)
+
+			segments.append(Point(Latitude = lat, Longitude = lon))
+
+		return segments		
 
 	def Modifier_API(self):
 		"""
