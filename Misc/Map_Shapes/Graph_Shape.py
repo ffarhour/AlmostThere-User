@@ -4,6 +4,11 @@
 .. moduleauthor: Farmehr Farhour f.farhour@gmail.com
 
 """
+
+
+##AT API data read/write starts here
+
+
 #import requests
 import requests
 #import json
@@ -30,6 +35,7 @@ for a in response:
 
 
 
+## The basemap core starts here
 
 from mpl_toolkits.basemap import Basemap
 import numpy as np
@@ -58,24 +64,9 @@ for file in os.listdir("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/"
         path = "C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/"
         m.readshapefile(path + filename,filename)
 
-"""
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/road_cl_reprojected",'roads')
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/building_poly_reprojected",'building_poly')
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/coastline_reprojected",'coastline')
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/island_poly_reprojected",'island_poly')
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/lake_poly_reprojected",'lake_poly')
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/residential_area_poly_reprojected",'residential_area_poly')
-m.readshapefile("C:/Users/F.Farhour/Downloads/Maps/BA32_Shapev1-03/BA32/breakwater_cl_reprojected",'breakwater_cl')
-"""
 
+#put points on the map
 
-#put a point on the map
-"""
-#location of 2 points
-lon = [174.70428,174.9,]
-
-lat = [-36.75, -36.852671]
-"""
 # convert to map projection coords.
 # Note that lon,lat can be scalars, lists or numpy arrays.
 xpt,ypt = m(longlist,latlist)
