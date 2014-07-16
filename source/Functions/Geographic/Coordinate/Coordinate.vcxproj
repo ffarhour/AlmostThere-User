@@ -84,6 +84,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cartesian.cpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -91,6 +92,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cartesian.h" />
     <ClInclude Include="Distance.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

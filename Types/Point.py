@@ -81,3 +81,5 @@ class Point:
 		
 		return True
 
+	def __str__(self):
+		return "point " + str(self.Latitude) + " " + str(self.Longitude) + " " + str(self.DateTime)
