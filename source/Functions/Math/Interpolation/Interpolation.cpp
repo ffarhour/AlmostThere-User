@@ -67,9 +67,9 @@ double * Linear_Interpolate_3Points(double x0, double y0, double z0, double x1, 
 
 	double magnitude = sqrt(pow(v[0], 2) + pow(v[1], 2) + pow(v[2], 2));
 
-	result[0] = x0 + magnitude * v[0];
-	result[1] = y0 + magnitude * v[1];
-	result[2] = z0 + magnitude * v[2];
+	result[0] = x0 + (d / magnitude) * v[0];
+	result[1] = y0 + (d / magnitude) * v[1];
+	result[2] = z0 + (d / magnitude) * v[2];
 
 	return result;
 }

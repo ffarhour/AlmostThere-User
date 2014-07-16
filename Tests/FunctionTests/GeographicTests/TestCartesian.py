@@ -10,7 +10,7 @@ class Test_ToCartesian(unittest.TestCase):
 		lat = 0
 		lon = 0
 
-		expectedx = 6371
+		expectedx = 6378.136999999999
 		expectedy = 0
 		expectedz = 0
 
@@ -23,6 +23,25 @@ class Test_ToCartesian(unittest.TestCase):
 		self.assertEquals(actualx, expectedx)
 		self.assertEquals(actualy, expectedy)
 		self.assertEquals(actualz, expectedz)
+
+	def test_1010(self):
+		lat = 10
+		lon = 10
+
+		expectedx = 6186.437066445538
+		expectedy = 1090.835769269275
+		expectedz = 1100.2485428780165
+
+
+
+		results = ToCartesian(lat, lon)
+
+		actualx, actualy, actualz = results
+		
+		self.assertEquals(actualx, expectedx)
+		self.assertEquals(actualy, expectedy)
+		self.assertEquals(actualz, expectedz)
+		
 
 class Test_ToGeo(unittest.TestCase):
 
@@ -46,6 +65,20 @@ class Test_ToGeo(unittest.TestCase):
 
 		self.assertEqual(actuallat, expectedLat)
 		self.assertEqual(actuallon, expectedLong)
+
+	def test_GEO_B(self):
+
+		x = 6186.437066445538
+		y = 1090.835769269275
+		z = 1100.2485428780165
+
+		expectedLat = 9.976742283610845
+		expectedLong = 10
+
+		actuallat, actuallong = ToGeo(x, y, z)
+
+		self.assertEqual(actuallat, expectedLat)
+		self.assertEqual(actuallong, expectedLong)
 
 
 if __name__ == '__main__':
