@@ -12,6 +12,7 @@
 
 #include "Distance.h"
 #include "Cartesian.h"
+#include "Shape.h"
 
 #include <math.h>
 
@@ -20,6 +21,7 @@ static PyMethodDef CoordinateMethods[] = {
 		{ "Distance_LatLongs", Distance_LatLongs, METH_VARARGS, "Calculates the distance between two Latitude and Longitude points" },
 		{ "ToCartesian", ToCartesian, METH_VARARGS, "Converts the input latitude and longitude into relevant xyz coordinates" },
 		{ "ToGeo", ToGeo, METH_VARARGS, "Converts cartesian coordinates into geographic ones" },
+		{ "InQuad", InQuad, METH_VARARGS, "Determins if a point is within the a set of four points forming a quadrilateral" },
 		{ NULL, NULL, 0, NULL }
 };
 

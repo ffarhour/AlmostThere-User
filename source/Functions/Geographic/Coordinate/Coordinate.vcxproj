@@ -87,6 +87,7 @@
     <ClCompile Include="Cartesian.cpp" />
     <ClCompile Include="Distance.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -94,6 +95,7 @@
   <ItemGroup>
     <ClInclude Include="Cartesian.h" />
     <ClInclude Include="Distance.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

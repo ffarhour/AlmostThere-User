@@ -12,4 +12,8 @@ Coordinate:
 	- ToGeo (x, y, z)
 		Retusn the geographic coordinates of a point based on the cartesian coordinates
 
+	- InQuad(lat1, lon1, lat2, lon2, lat3, lon3, lat4, lon4, point_lat, point_lon)
+		The first four sets of lat lon points form the quad, and then run a test to determine 
+		if point_lat point_lon fall inside of the formed quad
+
 """

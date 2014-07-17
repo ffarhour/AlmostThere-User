@@ -19,6 +19,7 @@
   <ItemGroup>
     <Compile Include="TestCartesian.py" />
     <Compile Include="TestCoordinate.py" />
+    <Compile Include="TestShape.py" />
     <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>

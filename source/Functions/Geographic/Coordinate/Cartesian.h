@@ -6,8 +6,6 @@
 extern "C" {
 #endif
 
-	/* Header file for Distance */
-
 	// Python Functions
 	PyObject * ToCartesian(PyObject * self, PyObject * args);
 	PyObject * ToGeo(PyObject * self, PyObject * args);

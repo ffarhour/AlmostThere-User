@@ -4,7 +4,7 @@
 
 #ifdef _DEBUG
 #define DEBUG_WAS_DEFINED
-#unfdef _DEBUG
+#undef _DEBUG
 #endif
 
 #include <Python.h>
