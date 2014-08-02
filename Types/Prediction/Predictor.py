@@ -18,7 +18,7 @@ class Predictor:
 		# The path that will be followed
 		self.path = None
 
-		# The destinaition that we aim to reach
+		# The destination that we aim to reach
 		self.destination = None
 		
 		# THe current position, updated once we recieve data or interpolate
@@ -128,6 +128,8 @@ class Predictor:
 		distance = 0
 
 		index = self.DeterminePath_Index()
+		index_destination = self.DeterminePath_Index(currentPosition = destination)
+
 
 		self.position_indexInPath = index
 
@@ -135,12 +137,22 @@ class Predictor:
 		for x in range(index, len(path)):
 		# A for loop that loops through all of the points in the path above the last point that the object was on
 			if x == index:
-				# We are going to calculate the distance between the point and the one before, rather than this point and the one after
+				# We are going to calculatethe distance between the point and the one before, rather than this point and the one after
+				if index == index_destination:
+					# Here, something different, as on same segment
+					distance += Distance_LatLongs(currentPosition.Latitude, currentPosition.Longitude, destination.Latitude, destination.Longitude)
+					break
 				continue
 			if x == index + 1:
 				# if 1 + index, thenw we use the current position
 				distance += Distance_LatLongs(path[x].Latitude, path[x].Longitude, currentPosition.Latitude, currentPosition.Longitude)
 				continue
+
+			if x == index_destination:
+				# We are at the final point. Since this may not be the final path, we do a different calcilation here
+				distance += Distance_LatLongs(path[x].Latitude, path[x].Longitude, destination.Latitude, destination.Longitude)
+				break
+
 	
 			# Calculate the great circle distance between points in the path
 			distance += Distance_LatLongs(path[x].Latitude, path[x].Longitude, path[x-1].Latitude, path[x-1].Longitude)

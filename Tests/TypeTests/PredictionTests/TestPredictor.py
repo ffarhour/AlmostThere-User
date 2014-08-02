@@ -55,6 +55,9 @@ class Test_Predictor_Calculate(unittest.TestCase):
 		self.predictor = Predictor()
 
 	def test_Basic_Calculate(self):
+		"""
+		A basic test of the calculate function in Predictor
+		"""
 		speed = 10
 
 		pointA = Point(Latitude = 0, Longitude = 0)
@@ -65,7 +68,8 @@ class Test_Predictor_Calculate(unittest.TestCase):
 
 		distance = Distance_LatLongs(currentPosition.Latitude, currentPosition.Longitude, pointB.Latitude, pointB.Longitude)
 
-		expected = distance / speed;
+		expected = 78.27790829048027;
+		# expected = 1568.520556798576 / speed / 2;
 
 		self.predictor.SetDestination(pointB)
 
@@ -81,8 +85,26 @@ class Test_Predictor_Calculate(unittest.TestCase):
 		actual = self.predictor.Calculate(average_speed = speed)
 
 		self.assertEqual(actual, expected)
-		
 
+	def test_Complex_Calculate(self):
+		"""
+		A far more comprehensive test of the Calculate function
+		"""
+		path = []
+		for x in range(100):
+			path.append(Point(DeviceID = 1, Latitude = x, Longitude = x))
+
+		currentPosition = Point(Latitude = 0.5, Longitude = 0.5)
+		destination = Point(Latitude = 50, Longitude = 50)
+
+		self.predictor.SetPath(path)
+		self.predictor.SetCurrentPosition(currentPosition)
+		self.predictor.SetDestination(destination)
+
+		expected = 1440.1631108640654
+		actual = self.predictor.Calculate(5)
+
+		self.assertEqual(actual, expected)
 		
 
 
@@ -102,8 +124,8 @@ class Test_Predictor_InterpolateSection(unittest.TestCase):
 
 		sections = self.predictor.InterpolateSection(pointA, pointB, resolution)
 
-		for x in range(len(sections)):
-			print(sections[x])
+		# for x in range(len(sections)):
+		#	print(sections[x])
 
 		self.assertEqual(len(sections), 10)
 		

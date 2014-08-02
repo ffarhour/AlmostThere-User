@@ -48,7 +48,8 @@ void _ToCartesian(double lat, double lon, double cartesian[3]){
 	lat = Degrees_To_Radians(lat);
 	lon = Degrees_To_Radians(lon);
 
-	double const N = pow(semi_Major, 2) / (sqrt(pow(semi_Major, 2) * pow(cos(lat), 2) + pow(semi_Minor, 2) * pow(sin(lat), 2)));
+	// double const N = pow(semi_Major, 2) / (sqrt(pow(semi_Major, 2) * pow(cos(lat), 2) + pow(semi_Minor, 2) * pow(sin(lat), 2)));
+	double const N = semi_Major / sqrt(1 - e_squared * pow(sin(lat), 2));
 
 	cartesian[0] = N * cos(lat) * cos(lon);
 	cartesian[1] = N * cos(lat) * sin(lon);

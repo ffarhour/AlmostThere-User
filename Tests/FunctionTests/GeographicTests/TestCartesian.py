@@ -10,15 +10,13 @@ class Test_ToCartesian(unittest.TestCase):
 		lat = 0
 		lon = 0
 
-		expectedx = 6378.136999999999
+		expectedx = 6378.137
 		expectedy = 0
 		expectedz = 0
 
 		results = ToCartesian(lat, lon)
 
-		actualx = results[0]
-		actualy = results[1]
-		actualz = results[2]
+		actualx, actualy, actualz = results
 
 		self.assertEquals(actualx, expectedx)
 		self.assertEquals(actualy, expectedy)
@@ -28,9 +26,9 @@ class Test_ToCartesian(unittest.TestCase):
 		lat = 10
 		lon = 10
 
-		expectedx = 6186.437066445538
+		expectedx = 6186.437066445539
 		expectedy = 1090.835769269275
-		expectedz = 1100.2485428780165
+		expectedz = 1100.2485428780167
 
 
 
@@ -42,6 +40,7 @@ class Test_ToCartesian(unittest.TestCase):
 		self.assertEquals(actualy, expectedy)
 		self.assertEquals(actualz, expectedz)
 		
+
 
 class Test_ToGeo(unittest.TestCase):
 
