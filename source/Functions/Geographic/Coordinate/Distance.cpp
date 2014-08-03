@@ -54,14 +54,24 @@ static double Calculate_Distance_Between_LatLongs(double lat1, double long1, dou
 	long1 = Degrees_To_Radians(long1);
 	long2 = Degrees_To_Radians(long2);
 
-	// Chord Length formula
-	double deltaX = cos(lat2) * cos(long2) - cos(lat1) * cos(long1);
-	double deltaY = cos(lat2) * sin(long2) - cos(lat1) * sin(long1);
-	double deltaZ = sin(lat2) - sin(lat1);
+	double deltaLat = abs(lat2 - lat1);
+	double deltaLong = abs(long2 - long1);
 
-	double C = sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2));
+	//// Chord Length formula
+	//double deltaX = cos(lat2) * cos(long2) - cos(lat1) * cos(long1);
+	//double deltaY = cos(lat2) * sin(long2) - cos(lat1) * sin(long1);
+	//double deltaZ = sin(lat2) - sin(lat1);
 
-	double CA = 2 * asin(C / 2);
+	//double C = sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2));
+
+	//double CA = 2 * asin(C / 2);
+
+	double CA = pow(cos(lat2) * sin(deltaLong), 2);
+	CA += pow(cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(deltaLong), 2);
+	CA = sqrt(CA);
+	CA = atan2(CA, (sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(deltaLong)));
+
+	// Vincinty Formula
 
 	double d = Radius * CA;
 

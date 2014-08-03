@@ -11,11 +11,12 @@
 #include "Cartesian.h"
 
 #include <iostream>
+using namespace std;
 
 double const semi_Major = 6378.1370;
 double const semi_Minor = 6356.7523;
 double e = semi_Minor / semi_Major;
-double const e_squared = 1 - pow(semi_Minor / semi_Major, 2);
+double const e_squared = 1 - pow(semi_Minor, 2) / pow(semi_Major, 2);
 double const e_quart = pow(e_squared, 2);
 
 static double Degrees_To_Radians(double degree){
@@ -81,7 +82,28 @@ void _ToGeo(double x, double y, double z, double geo[2]){
 	// Latitude
 	// http://en.wikipedia.org/wiki/Geodetic_datum (bowring)
 
-	// Ferrari's solution
+	// The value calculated
+
+	double k = 0;
+
+	// The one used in the iteration
+	double k_prev = NULL;
+
+	const double p = sqrt(pow(x, 2) + pow(y, 2));
+
+	do{
+		k_prev = k;
+
+		double c = pow((pow(p, 2) + (1 - e_squared) * pow(z, 2) * pow(k_prev, 2)), 1.5);
+		c /= (semi_Major * e_squared);
+
+		k = (c + (1 - e_squared) * pow(z, 2) * pow(k_prev, 3)) / (c - pow(p, 2));
+	} while (k_prev - k > 0.00000000000001);
+
+	double latitude = atan2(k * z, p);
+
+	// Ferrari's solution - good but not accurate enough
+	/*
 	double p = sqrt(pow(x, 2) + pow(y, 2));
 	double l = ((1 - e_squared) * pow(z, 2)) / pow(semi_Major, 2);
 	double rho = ((pow(p, 2) / pow(semi_Major, 2)) + l - e_quart) / 6;
@@ -91,7 +113,7 @@ void _ToGeo(double x, double y, double z, double geo[2]){
 	double v = sqrt(pow(u, 2) + e_quart * l);
 	double w = (e_squared * (u + v - l)) / (2 * v);
 	double k = 1 + (e_squared * (sqrt(u + v + pow(w, 2)) + w)) / (u + v);
-	double latitude = atan2(k * z, p);
+	double latitude = atan2(k * z, p); */
 
 	// Iteration
 	/*

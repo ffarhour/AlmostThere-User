@@ -28,7 +28,7 @@ class Test_ToCartesian(unittest.TestCase):
 
 		expectedx = 6186.437066445539
 		expectedy = 1090.835769269275
-		expectedz = 1100.2485428780167
+		expectedz = 1100.248542878017
 
 
 
@@ -71,12 +71,12 @@ class Test_ToGeo(unittest.TestCase):
 		y = 1090.835769269275
 		z = 1100.2485428780165
 
-		expectedLat = 9.976742283610845
+		expectedLat = 10
 		expectedLong = 10
 
 		actuallat, actuallong = ToGeo(x, y, z)
 
-		self.assertEqual(actuallat, expectedLat)
+		self.assertEqual(round(actuallat, 2), expectedLat)
 		self.assertEqual(actuallong, expectedLong)
 
 
