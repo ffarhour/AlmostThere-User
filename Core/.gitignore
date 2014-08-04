@@ -1,0 +1,9 @@
+env
+*.tlog
+*.idb
+*.opensdf
+*.sdf
+*.exp
+*.pyd
+*.ipch
+.xml
