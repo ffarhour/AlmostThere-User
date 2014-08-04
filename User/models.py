@@ -7,13 +7,13 @@ class User(models.Model):
 	"""
 	The user
 	"""
-	DeviceID = models.IntegerField(default = -1)
+	DeviceID = models.IntegerField(default = -1, unique = True)
 
 class Bus(models.Model):
 	"""
 	The bus
 	"""
-	Bus_ID = models.CharField(max_length = 25)
+	Bus_ID = models.CharField(max_length = 25, unique = True)
 
 
 class Position(models.Model):
@@ -45,11 +45,23 @@ class Route(models.Model):
 	A route
 	"""
 	
-	Route_ID = models.CharField(default = -1, max_length = 20)
+	Route_ID = models.CharField(default = -1, max_length = 20, unique = True)
+
+
+class Trip(models.Model):
+	"""
+	A trip
+	"""
+
+	TripID = models.CharField(max_length = 25, default = -1, unique = True)
+
+	route = models.ForeignKey(Route)
+	
+	direction = models.IntegerField(default = -1)
 
 
 
-class Shape_Points(models.Model):
+class Shape_Point(models.Model):
 	"""
 	Different points on shapes, identified by shape id
 	"""
@@ -62,7 +74,6 @@ class Shape_Points(models.Model):
 	route = models.ForeignKey(Route)
 
 
-
 class Stop(models.Model):
 	"""
 	A stop
@@ -71,4 +82,15 @@ class Stop(models.Model):
 	Latitude = models.FloatField(default = None)
 	Longitude = models.FloatField(default = None)
 
-	Stop_ID = models.CharField(max_length=15, default = -1)
+	Stop_ID = models.CharField(max_length=15, default = -1, unique = True)
+
+class Stop_Time(models.Model):
+	"""
+	A stop time
+	"""
+
+	stop = models.ForeignKey(Stop)
+	trip = models.ForeignKey(Trip)
+
+	time = models.TimeField(default = datetime.now())
+
