@@ -12,6 +12,23 @@ body{
     padding:0px;
 }
 .screen{
-    text-align:center;
-	top:0;
+	font-size: 32px;
+  	position: absolute;
+  	left: 50%;
+  	top: 82px;
+ /*
+  	margin-left: -0.01%;
+	
+  	margin-top: -25%;
+  	*/
+  	/* 
+  	Yep!
+  	*/
+  	transform: translate(-50%, -50%);
+  	/*
+  	Not even necessary really. 
+  	e.g. Height could be left out!
+  	*/
+  	width:40%;
+	height:0%;
 }
