@@ -5,3 +5,13 @@ body{
 	background-color:#000000;
 	background-image:url(../images/bg.jpg);
 }
+.phone{
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+}
+.screen{
+    text-align:center;
+	top:0;
+}
