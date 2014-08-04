@@ -8,3 +8,9 @@ def index(request):
 	"""
 	context = []
 	return render(request, 'index.html', context)
+def AlmostThere(request):
+	"""
+	The AlmostThere page - the screen
+	"""
+	context = []
+	return render(request, 'AlmostThere.html', context)
