@@ -16,9 +16,9 @@ def AlmostThere(request):
 	context = []
 	return render(request, 'AlmostThere.html', context)
 
-def btnClick(request):
+def ButtonOne(request):
 	"""
 	Ajax call
 	"""
 	context = []
-	return "Welcome"
+	return HttpResponse("welcome")
