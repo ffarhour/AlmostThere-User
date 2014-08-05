@@ -4,18 +4,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Almost There</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script>
 
 $(document).ready(function(){
 		fadeWindow();
+
+		$('#NavPage').hide();
+		$('#Timer').hide();
 });
 
 function buttonNavigate(){
-	$('#window').hide(100);
+	// $( '#HomePage').hide(100);
+	//$('#NavPage').fadeIn(1000);
+	$('#window').hide(10);
 	$('#window').load('/User/ButtonNavigation/');
-	fadeWindow();
+	$('#window').fadeIn(1000);
+};
+
+function buttonNavTimer(data){
+	// $('#window').hide(100);
+	// $('#window').load('/User/ButtonNavTimer/');
+	// fadeWindow();
+	$('#window').hide(10);
+	//$('#window').load('/User/ButtonNavTimer/', { 'firstStop' : $('#firstStop').val(),
+	//		'secondStop' : $('#secondStop').val()}
+	//		);
+	$.get('/User/ButtonNavTimer/', { "firstStop" :  $('#firstStop').val(), "secondStop" : $('#secondStop').val(),
+			"route" : $('#secondStop').val()}, function(data){
+			$("#window").html(data);
+			});
+	$('#window').fadeIn(1000);
 };
 
 function fadeWindow(){
@@ -24,6 +44,16 @@ function fadeWindow(){
 
 function doSomething(){	
 	$('#btnClick').load('/User/ButtonOne/');
+};
+
+
+function NavLoc(){
+	
+	data = {
+			"firstStop" : $('#firstStop').val(),
+			"secondStop" : $('#secondStop').val()
+		};
+	buttonNavTimer(data);
 };
 
 
@@ -56,14 +86,51 @@ function doSomethingHere()
 
 	<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
 	<button id='ButtonNavigation', onclick="buttonNavigate()">Navigation Page</button>
-<div id="window">
+
+<div id="window" style='background:white;height:100%;'>
 	<div class="button">
 
 	
 	</div>
-	<div class="logo" style="text-align:center; margin-top:0px; margin-bottom:0px; padding:0px;" >
+	<div id='HomePage' class="logo" style="text-align:center; margin-top:0px; margin-bottom:0px; padding:0px;" >
 	<img src="{% static 'images/Logo_reflection.png' %}" id="mainlogo" width="100" />
 	</div>
+
+	
+
+	<!-- 
+
+<div id='NavPage'>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+		
+	</script>
+
+<h2 style='font-family:Helvetica' > Use This Page to navigate to the location </h2>
+
+<h3>Stop</h3>
+<input id="firstStop" type='text'>
+<br />
+<h3>to Stop</h3>
+<input id='secondStop' type='text'>
+
+<br />
+<br />
+<input id='NavigateToLocation' type='submit' onclick="NavLoc();">
+
+</div>
+
+
+<div id="Timer">
+
+Timer
+
+</div>
+
+-->
+
 </div>
 </body>
 </html>

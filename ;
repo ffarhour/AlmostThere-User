@@ -1,21 +1,18 @@
 
-<div id='NavPage'>
+<div>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
 		
-
-function NavLoc(){
-	
-	data = {
-			"firstStop" : $('#firstStop').val(),
-			"secondStop" : $('#secondStop').val()
+		function NavLoc(){
+			
+			data = {
+				"firstStop" : $('#firstStop').val(),
+				"secondStop" : $('#secondStop').val()
+			};
+		buttonNavTimer(data);
 		};
-	buttonNavTimer(data);
-};
-
-
 	</script>
 
 <h2 style='font-family:Helvetica' > Use This Page to navigate to the location </h2>
@@ -28,7 +25,6 @@ function NavLoc(){
 
 <br />
 <br />
-<input id='NavigateToLocation' type='submit' onclick="NavLoc();">
+<input id='NavigateToLocation' type='submit' function="NavLoc()">
 
 </div>
-
