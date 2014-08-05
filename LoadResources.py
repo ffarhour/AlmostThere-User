@@ -99,8 +99,9 @@ def stop_time_calc(stop_times):
 		Stop_Time(
 		stop = Stop.objects.get(Stop_ID = stop_time_data[3]),
 		trip = Trip.objects.get(TripID = stop_time_data[0]),
-		time = time.strptime(stop_time_data[2],"%H:%M:%S")
-			)
+		# time = time.strptime(stop_time_data[2],"%H:%M:%S")
+		time = stop_time_data[2]
+		)
 				)
 
 	Stop_Time.objects.bulk_create(stop_times_list)
