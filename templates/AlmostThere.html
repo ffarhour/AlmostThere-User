@@ -8,26 +8,12 @@
 
 <script>
 
-function doSomething(){
-	
-	$('#btnClick').load('/User/ButtonOne/');
+$(document).ready(function(){
+	$('#window').hide().fadeIn(1500);
+		});
 
-	/*
-	$.ajax({
-	url: '/User/ButtonOne',
-	//data:
-       type: "GET",
-       dataType: "json",
-       success: function(json){
-		alert(json)
-       },
-	error: function( xhr, status, errorThrown ) {
-        alert( "Sorry, there was a problem!" );
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-    },       
-			}); */
+function doSomething(){	
+	$('#btnClick').load('/User/ButtonOne/');
 };
 
 
@@ -57,7 +43,7 @@ function doSomethingHere()
 </head>
 
 <body>
-<div class="window">
+<div id="window">
 	<div class="button">
 	<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
 	</div>
