@@ -8,7 +8,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'UserSite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+	
+    url(r'^User/ButtonNavigation/', User.views.ButtonNavigation, name="ButtonNavigation"),
     url(r'^User/ButtonOne/$', User.views.ButtonOne, name="ButtonOne"),
     # url(r'^AlmostThere', User.views.AlmostThere, name="AlmostThere"),
     url(r'^admin/', include(admin.site.urls)),

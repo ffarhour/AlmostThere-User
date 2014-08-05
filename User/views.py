@@ -22,3 +22,10 @@ def ButtonOne(request):
 	"""
 	context = []
 	return HttpResponse("welcome")
+
+def ButtonNavigation(request):
+	"""
+	Navigate to Navigation page
+	"""
+	context = []
+	return render(request, "Navigation.html", context)

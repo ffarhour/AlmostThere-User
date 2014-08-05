@@ -9,8 +9,18 @@
 <script>
 
 $(document).ready(function(){
-	$('#window').hide().fadeIn(1500);
-		});
+		fadeWindow();
+});
+
+function buttonNavigate(){
+	$('#window').hide(100);
+	$('#window').load('/User/ButtonNavigation/');
+	fadeWindow();
+};
+
+function fadeWindow(){
+	$('#window').hide().fadeIn(1000);
+};
 
 function doSomething(){	
 	$('#btnClick').load('/User/ButtonOne/');
@@ -43,9 +53,13 @@ function doSomethingHere()
 </head>
 
 <body>
+
+	<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
+	<button id='ButtonNavigation', onclick="buttonNavigate()">Navigation Page</button>
 <div id="window">
 	<div class="button">
-	<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
+
+	
 	</div>
 	<div class="logo" style="text-align:center; margin-top:0px; margin-bottom:0px; padding:0px;" >
 	<img src="{% static 'images/Logo_reflection.png' %}" id="mainlogo" width="100" />
