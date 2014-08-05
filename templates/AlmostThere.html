@@ -5,7 +5,21 @@
 <title>Almost There</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
 
+<script>
 
+function doSomething(){
+	
+	$.get('/User/btnClick/', {}, function(data){
+			$('#btnClick').text(data);
+			// alert("Recieved data");
+
+			});
+};
+
+
+</script>
+
+<!--
 <script>
 function doSomethingHere()
 {
@@ -24,12 +38,12 @@ function doSomethingHere()
     document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
     }
   }
-}
-</script>
+} 
+</script> -->
 </head>
 
 <body>
 <div class="button">
-<button onclick="doSomethingHere()">Do Something Here </button>
+<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
 </body>
 </html>

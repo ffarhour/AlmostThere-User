@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -14,3 +15,10 @@ def AlmostThere(request):
 	"""
 	context = []
 	return render(request, 'AlmostThere.html', context)
+
+def btnClick(request):
+	"""
+	Ajax call
+	"""
+	context = []
+	return "Welcome"
