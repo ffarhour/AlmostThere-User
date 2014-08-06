@@ -3,7 +3,7 @@
 	*/
 #include "stdafx.h"
 
-#include <Cartesian.h>
+// #include <Cartesian.h>
 #include "Interpolation.h"
 
 static PyMethodDef InterpolationMethods[] = {
