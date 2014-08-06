@@ -1,1 +1,5 @@
 env
+db.sqlite3
+*.pyc
+frontend-user.v12.suo
+;
