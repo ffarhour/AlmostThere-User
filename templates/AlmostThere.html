@@ -32,8 +32,7 @@ function buttonNavTimer(data){
 	//$('#window').load('/User/ButtonNavTimer/', { 'firstStop' : $('#firstStop').val(),
 	//		'secondStop' : $('#secondStop').val()}
 	//		);
-	$.get('/User/ButtonNavTimer/', { "firstStop" :  $('#firstStop').val(), "secondStop" : $('#secondStop').val(),
-			"route" : $('#secondStop').val()}, function(data){
+	$.get('/User/ButtonNavTimer/', { "firstStop" :  $('#firstStop').val(), "secondStop" : $('#secondStop').val()}, function(data){
 			$("#window").html(data);
 			});
 	$('#window').fadeIn(1000);
