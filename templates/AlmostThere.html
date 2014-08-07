@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Almost There</title>
+<link href="{% static 'css/app.css' %}" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script>
@@ -58,44 +59,22 @@ function NavLoc(){
 
 
 </script>
-
-<!--
-<script>
-function doSomethingHere()
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-  		{// code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlhttp=new XMLHttpRequest();
- 	 	}
-	else
-  		{// code for IE6, IE5
-  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  		}
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-    }
-  }
-} 
-</script> -->
 </head>
 
-<body>
-
-	<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
-	<button id='ButtonNavigation', onclick="buttonNavigate()">Navigation Page</button>
-
-<div id="window" style='background:white;height:100%;'>
-	<div class="button">
-
-	
+<body bgcolor="#fcfcfc" background="{% static 'images/bg_Homescreen.jpg' %">
+<div id="window">
+	<div class="text" id="titletext">
+    	<a>With Almost There,</a><br />
+        <a>you will never miss a bus again</a><br />
+    </div>
+	<div id='HomePage' class="logo">
+		<img src="{% static 'images/Logo_reflection.png' %}" id="mainlogo" width="110" />
 	</div>
-	<div id='HomePage' class="logo" style="text-align:center; margin-top:0px; margin-bottom:0px; padding:0px;" >
-	<img src="{% static 'images/Logo_reflection.png' %}" id="mainlogo" width="100" />
+    
+	<div class="buttons">
+		<button class="button" id='ButtonNavigation', onclick="buttonNavigate()" title="GetStarted">GET STARTED</button><br />
+    	<!--<button  id='btnClick' onclick="doSomething()">Do Something Here </button>-->
 	</div>
-
 	
 
 	<!-- 
