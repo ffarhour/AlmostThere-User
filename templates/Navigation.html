@@ -1,11 +1,8 @@
 
-<div id='NavPage'>
-
+<div class="nav" id='NavPage'>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
-		
-
 function NavLoc(){
 	
 	data = {
@@ -14,21 +11,19 @@ function NavLoc(){
 		};
 	buttonNavTimer(data);
 };
-
-
-	</script>
-
-<h2 style='font-family:Helvetica' > Use This Page to navigate to the location </h2>
-
-<h3>Stop</h3>
-<input id="firstStop" type='text'>
+</script>
+    
+    
+<div class="text" id="titletext">
+	<a> My Journey</a>
+</div>
+<div class="text" id="bodytext">
+	<a style="margin-right:20px;">A <input id="firstStop" style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text' placeholder="My Location"></a><br />
+	<a style="margin-right:20px;">B <input id='secondStop' style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text'placeholder="Enter Your Destination"></a>
+</div>
 <br />
-<h3>to Stop</h3>
-<input id='secondStop' type='text'>
-
-<br />
-<br />
-<input id='NavigateToLocation' type='submit' onclick="NavLoc();">
-
+<div class="buttons">
+	<input class="button" id='NavigateToLocation' type='submit' onclick="NavLoc();" style="color:#000000; background-color:#FFFFFF;" value="FIND">
+</div>
 </div>
 
