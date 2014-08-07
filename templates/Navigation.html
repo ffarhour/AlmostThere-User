@@ -6,8 +6,8 @@
 function NavLoc(){
 	
 	data = {
-			"firstStop" : $('#firstStop').val(),
-			"secondStop" : $('#secondStop').val()
+			"firstStop" : $('#firstStop').val()
+			// "secondStop" : $('#secondStop').val()
 		};
 	buttonNavTimer(data);
 };
@@ -17,11 +17,23 @@ function NavLoc(){
 <div class="text" id="titletext">
 	<a> My Journey</a>
 </div>
+
+<!-- 
+<div class="text" id="Explanation"
+	<a> Please enter your stop numbers </a>
+</div>
+
+--> 
 <div class="text" id="bodytext">
-	<a style="margin-right:20px;">A <input id="firstStop" style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text' placeholder="My Location"></a><br />
-	<a style="margin-right:20px;">B <input id='secondStop' style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text'placeholder="Enter Your Destination"></a>
+	<a style="margin-right:20px;">Stop Number<input id="firstStop" style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text' placeholder="Enter your stop number"></a><br />
+	<!-- <a style="margin-right:20px;">B <input id='secondStop' style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text'placeholder="Enter Your Destination"></a> -->
 </div>
 <br />
+
+<!-- 
+	<a style="margin-right:20px;">Stop Number <input id="firstStop" style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text' placeholder="Starting stop"></a><br /> -->
+
+
 <div class="buttons">
 	<input class="button" id='NavigateToLocation' type='submit' onclick="NavLoc();" style="color:#000000; background-color:#FFFFFF;" value="FIND">
 </div>
