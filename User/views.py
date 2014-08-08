@@ -47,7 +47,7 @@ def ButtonNavTimer(request):
 	# stopTwo = Stop.objects.get(Stop_ID =  request.GET['secondStop'])
 	# route = Route.objects.get(Route_ID = request.GET['route'])
 
-	predictor = Predictor()
+	# predictor = Predictor()
 
 	#predictor.SetCurrentLocation(Point(stopOne.Latitude, stopOne.Longitude))
 	# predictor.SetDestination(Point(stopTwo.Latitude, stopTwo.Longitude))
@@ -62,18 +62,22 @@ def ButtonNavTimer(request):
 	#				))
 
 	trips = []
+
 	for stop_time in Stop_Time.objects.filter(stop = stopOne):
-		if stop_time.time < (datetime.now() + timedelta(hours=1)).time():
-			trips.append(stop_time.trip)
+		if stop_time.time < (datetime.now() + timedelta(minutes=1)).time():
+			if stop_time.trip not in trips:
+				trips.append(stop_time.trip)
+			
 
 	#predictor.SetDestination(points_list[len(points_list)-1])
 	# predictor.SetPath(points_list)
 	# predictor.SetCurrentPosition(points_list[0])
 	# arrival_time = predictor.Calculate(30)
-
+				
 	route_list = []
 	for trip in trips:
-		route_list.append(trip.route.Route_ID)
+		if trip.route not in route_list:
+			route_list.append(trip.route)
 
 	context = {'route_list' : route_list}
 

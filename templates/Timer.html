@@ -1,3 +1,5 @@
+<div class='Timer'>
+
 <script>
 
 	$(document).load(function(){
@@ -16,7 +18,10 @@ function sendRoute(routeId){
 	{% if route_list %}
 
 		{% for route in route_list %}
-		<a onclick='sendRoute({{ route.Route_ID }})'>{{ route.short_name }}
+		<p>
+		<a onclick='sendRoute({{ route.Route_ID }})'>{{ route.short_name }}</a>
+		
+		
 		{% endfor %}
 
 
@@ -32,5 +37,7 @@ function sendRoute(routeId){
 
 	{% endif %}
 
+
+</div>
 
 </div>

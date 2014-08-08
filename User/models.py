@@ -60,6 +60,12 @@ class Trip(models.Model):
 	
 	direction = models.IntegerField(default = -1)
 
+	def __eq__(self, other):
+		if self.TripID == other.TripID:
+			return True
+		else:
+			return False
+
 
 
 class Shape_Point(models.Model):
