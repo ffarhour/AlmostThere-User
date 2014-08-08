@@ -22,6 +22,15 @@ function buttonNavigate(){
 	$('#window').hide(10);
 	$('#window').load('/User/ButtonNavigation/');
 	$('#window').fadeIn(1000);
+	
+//backbutton functions
+	//history.pushState({}, '', 'ButtonNavigation');
+// Revert to a previously saved state
+//window.addEventListener('popstate', function(event) {
+  //console.log('popstate fired!');
+
+  //updateContent(event.state);
+//});
 };
 
 function buttonNavTimer(data){
@@ -55,8 +64,6 @@ function NavLoc(){
 		};
 	buttonNavTimer(data);
 };
-
-
 </script>
 </head>
 
