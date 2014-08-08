@@ -22,6 +22,14 @@ body{
 	padding:0px; 
 	top:0px;
 }
+.timer{
+	background:url(../images/bg_page.jpg);
+	height:516px; 
+	width:289px; 
+	margin:0px; 
+	padding:0px; 
+	top:0px;
+}
 .text{
 	text-align:center;
 	text-shadow:#000;

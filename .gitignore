@@ -2,3 +2,7 @@ env
 db.sqlite3
 *.pyc
 frontend-user.v12.suo
+*.obj
+*.lib
+*.suo
+*.sln
