@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from User import views
 
 urlpatterns = patterns(
+		'',
 		
     url(r'^/TimerData/$', views.TimerData, name="TimerData"),
     url(r'^/ButtonNavigation/$', views.ButtonNavigation, name="ButtonNavigation"),

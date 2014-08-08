@@ -79,7 +79,10 @@ def ButtonNavTimer(request):
 		if trip.route not in route_list:
 			route_list.append(trip.route)
 
-	context = {'route_list' : route_list}
+	context = {'route_list' : route_list,
+			'stop' : request.GET['firstStop']
+			}
+	
 
 	return render(request, "Timer.html", context)
 
@@ -87,5 +90,29 @@ def TimerData(request):
 	"""
 	For the TimerData
 	"""
-	context = []
-	return "Welcome"
+	predictor = Predictor()
+
+	route = Route.objects.get(Route_ID = request.GET['route_id'])
+	stopOne = Stop.objects.get(Stop_ID =  request.GET['stop'])
+	
+
+
+	shape_info = Shape_Point.objects.filter(route = route)
+	
+	points_list = []
+	for shape in shape_info:
+		points_list.append(
+				Point(
+					Latitude = shape.Latitude,
+					Longitude = shape.Longitude
+					))
+
+	predictor.SetPath(points_list)
+	predictor.SetCurrentPosition(points_list[0])
+	predictor.SetDestination(Point(
+		Latitude = stopOne.Latitude,
+		Longitude = stopOne.Longitude))
+
+	time_taken = predictor.Calculate(30)
+
+	return HttpResponse("<div id='timer' class='timer'> Bus is arriving at " + str(time_taken) + " hours to arrive")
