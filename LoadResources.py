@@ -40,7 +40,9 @@ def populate():
 	
 	route_list = []
 	for route in routes:
-		route_list.append(Route(Route_ID = route.split(',')[0]))
+		route_data = route.split(',')
+		route_list.append(Route(Route_ID = route_data[0],
+			short_name = route_data[2]))
 
 	Route.objects.bulk_create(route_list)
 	print("Created " + str(len(route_list)) + " routes")

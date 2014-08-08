@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from Core.Types.Prediction import Predictor
 from Core.Types import Point
 
-from User.models import Stop, Route, Shape_Point
+from User.models import Stop, Route, Shape_Point, Stop_Time
+
+from datetime import timedelta, datetime
 
 # Create your views here.
 
@@ -41,30 +43,39 @@ def ButtonNavTimer(request):
 	"""
 
 
-	# stopOne = Stop.objects.get(Stop_ID =  request.GET['stopOne'])
-	# stopTwo = Stop.objects.get(Stop_ID =  request.GET['stopTwo'])
-	route = Route.objects.get(Route_ID = request.GET['route'])
+	stopOne = Stop.objects.get(Stop_ID =  request.GET['firstStop'])
+	# stopTwo = Stop.objects.get(Stop_ID =  request.GET['secondStop'])
+	# route = Route.objects.get(Route_ID = request.GET['route'])
 
 	predictor = Predictor()
 
 	#predictor.SetCurrentLocation(Point(stopOne.Latitude, stopOne.Longitude))
 	# predictor.SetDestination(Point(stopTwo.Latitude, stopTwo.Longitude))
 
-	shape_info = Shape_Point.objects.filter(route = route)
-	points_list = []
-	for shape in shape_info:
-		points_list.append(
-				Point(
-				Latitude = shape.Latitude,
-				Longitude = shape.Longitude
-					))
+	# shape_info = Shape_Point.objects.filter(route = route)
+	# points_list = []
+	# for shape in shape_info:
+	#	points_list.append(
+	#			Point(
+	#			Latitude = shape.Latitude,
+	#			Longitude = shape.Longitude
+	#				))
 
-	predictor.SetDestination(points_list[len(points_list)-1])
-	predictor.SetPath(points_list)
-	predictor.SetCurrentPosition(points_list[0])
-	arrival_time = predictor.Calculate(30)
+	trips = []
+	for stop_time in Stop_Time.objects.filter(stop = stopOne):
+		if stop_time.time < (datetime.now() + timedelta(hours=1)).time():
+			trips.append(stop_time.trip)
 
-	context = {'bus_time' : arrival_time}
+	#predictor.SetDestination(points_list[len(points_list)-1])
+	# predictor.SetPath(points_list)
+	# predictor.SetCurrentPosition(points_list[0])
+	# arrival_time = predictor.Calculate(30)
+
+	route_list = []
+	for trip in trips:
+		route_list.append(trip.route.Route_ID)
+
+	context = {'route_list' : route_list}
 
 	return render(request, "Timer.html", context)
 

@@ -1,8 +1,36 @@
-TIMER
+<script>
+
+	$(document).load(function(){
+		$('#dataToshow').hide();
+			});
+
+function sendRoute(routeId){
+	$('#routeList').hide(10);
+	$('#dataToShow').load('/User/TimerData/', { 'route_id' : routeId});
+}
+
+</script>
+
+<div id="routeList">
+
+	{% if route_list %}
+
+		{% for route in route_list %}
+		<a onclick='sendRoute({{ route.Route_ID }})'>{{ route.short_name }}
+		{% endfor %}
+
+
+	{% endif %}
+
+</div>
 
 <div id="dataToShow">
 
-	Bus Arrival Time: {{ bus_time }}
+	{% if bus_arrival_time %}
+
+	Bus is arriving at {{ bus_arrival_time }}
+
+	{% endif %}
 
 
 </div>
