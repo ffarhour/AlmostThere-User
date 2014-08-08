@@ -1,5 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
+/*Author: Farmehr Farhour f.farhour@gmail.com*/
 body{
 	border:0;
 	padding:0;
@@ -76,23 +77,34 @@ body{
 	font-size:20px;
 	cursor:pointer;
 }
-#vertical-ticker{
-	height:15%px;
+#verticallist{
+	height:100%;
 	overflow:hidden;
 	margin:0; 
 	padding:0;
-	-webkit-box-shadow:0 1px 3px rgba(0,0,0, .4);
+	margin-right:10%;
+	margin-left:10%;
 }
 
-	#vertical-ticker li{
-		padding:35px 20px;
+	#verticallist li{
+		padding-top:4%;
+		padding-bottom:4%;
 		display:block;
 		background:#efefef;
 		color:#333;
-		border-bottom:1px solid #ddd;
+		border:none;
 		text-align:center;
-		font-size:12px;
-		font-weight:bold;
-		font-family: Helvetica Neue, times, serif;
-		margin:0;
+		font-size:16px;
+		font-weight:500;
+		font-family: Tahoma;
+		margin-top:2%;
+		margin-bottom:2%;
+		cursor:pointer;
+		overflow:hidden;
+		-webkit-box-shadow:0 1px 3px rgba(0,0,0, .4);
 	}
+	#verticallist li:hover
+	{
+	background-color:#370f44;
+	color:#fff;
+	} 

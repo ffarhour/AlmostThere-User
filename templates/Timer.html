@@ -18,43 +18,30 @@ function sendRoute(routeId){
 	$('#timer').fadeIn(100);
 };
 </script>
-<script type="text/javascript" src="{% static 'js/jquery.totemticker.js' %}"></script>
-<script>
-$(function(){
-			$('#vertical-ticker').totemticker({
-				row_height	:	'50px',
-				next		:	'#ticker-next',
-				previous	:	'#ticker-previous',
-				stop		:	'#stop',
-				start		:	'#start',
-				mousestop	:	true,
-			});
-		});
-</script>
 
  <div id="dataToShow">
 		{% if bus_arrival_time %}
 		<a">Bus is arriving at {{ bus_arrival_time }</a>
 		{% endif %}
-  </div>
-  
+        
 <div class="timer">
+
 	<div class="text" id="titletext">
     		<a>Routes</a>
 	</div>	
-    <p><a href="#" id="ticker-previous">Previous</a> / <a href="#" id="ticker-next">Next</a> / <a id="stop" href="#">Stop</a> / <a id="start" href="#">Start</a></p>
+    <br />
+    
   <div id="routeList">
 		{% if route_list %}
 			{% for route in route_list %}
-            <div style="text-align:center">
-            <ul id="vertical-ticker">
+            <ul id="verticallist">
 				<li onclick='sendRoute("{{ route.Route_ID }}")'>{{ route.short_name }}</li>
 			</ul>
-            </div>
 			<!--<div style="text-align:center">
 			<button onclick='sendRoute("{{ route.Route_ID }}")' style="text-align:center; width:20%; border:0; padding:10px; cursor:pointer;">{{ route.short_name }}</button>
 			</div>-->
 			{% endfor %}
 		{% endif %}
 	</div>
+</div>
 </div>
