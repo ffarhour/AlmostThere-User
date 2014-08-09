@@ -116,4 +116,4 @@ def TimerData(request):
 
 	time_taken = predictor.Calculate(30)
     
-	return HttpResponse("<div id='timer' class='timer'><div style='text-align:center; padding: 10px; color:#fff;  background:#370548; position:absolute; top:20%; width:100%; font-size:24px;'> Bus is arriving in<br />" + str(math.floor(time_taken*60)) + " minutes & " + str(math.ceil((time_taken - (math.floor(time_taken*60))/60)*3600)) + " seconds</div></div>")
+	return HttpResponse("<div id='timer' class='timer'><div style='font-family: Tahoma;text-align:center; padding: 10px; color:#fff;  background:#370548; position:absolute; top:20%; width:100%; font-size:24px;'> Bus is arriving in<br />" + str(math.floor(time_taken*60)) + " minutes & " + str(math.ceil((time_taken - (math.floor(time_taken*60))/60)*3600)) + " seconds</div></div>")

@@ -21,15 +21,6 @@ function buttonNavigate(){
 	$('#window').hide(10);
 	$('#window').load('/User/ButtonNavigation/');
 	$('#window').fadeIn(1000);
-	
-//backbutton functions
-	//history.pushState({}, '', 'ButtonNavigation');
-// Revert to a previously saved state
-//window.addEventListener('popstate', function(event) {
-  //console.log('popstate fired!');
-
-  //updateContent(event.state);
-//});
 };
 
 function buttonNavTimer(data){
@@ -63,6 +54,42 @@ function NavLoc(){
 		};
 	buttonNavTimer(data);
 };
+
+//backbutton functions
+//$(function(){
+//	history.pushState({}, '', 'ButtonNavigation');
+//	return false;
+//  $(window).on("popstate", function(e) {
+//    if (e.originalEvent.state !== null) {
+//    	$('#NavPage').load('/User/AlmostThere/');
+//		$('#NavPage').fadeIn(1000);
+//    }
+//  });
+// Revert to a previously saved state
+//window.addEventListener('popstate', function(event) {
+  //console.log('popstate fired!');
+
+  //updateContent(event.state);
+	//});
+//});
+
+
+function clickHandler(e) {
+  // Add an item to the history log
+  history.pushState({}, 'Navigation', 'Navigation');
+
+  return event.preventDefault();
+}
+// Revert to a previously saved state
+window.addEventListener('popstate', function() {
+  console.log('popstate fired!');
+
+  	$('body, html').load('/User/AlmostThere/');
+	$('body, html').fadeIn(1000);
+});
+
+
+
 </script>
 </head>
 
@@ -77,7 +104,7 @@ function NavLoc(){
 	</div>
     
 	<div class="buttons">
-		<button class="button" id='ButtonNavigation', onclick="buttonNavigate()" title="GetStarted">GET STARTED</button><br />
+		<button class="button" id='ButtonNavigation', onclick="buttonNavigate(); clickHandler()" title="GetStarted">GET STARTED</button><br />
     	<!--<button  id='btnClick' onclick="doSomething()">Do Something Here </button>-->
 	</div>
 	
