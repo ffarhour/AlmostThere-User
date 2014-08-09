@@ -7,6 +7,7 @@ from Core.Types import Point
 from User.models import Stop, Route, Shape_Point, Stop_Time
 
 from datetime import timedelta, datetime
+import math
 
 # Create your views here.
 
@@ -114,5 +115,5 @@ def TimerData(request):
 		Longitude = stopOne.Longitude))
 
 	time_taken = predictor.Calculate(30)
-
-	return HttpResponse("<div id='timer' class='timer'> Bus is arriving at " + str(time_taken) + " hours to arrive")
+    
+	return HttpResponse("<div id='timer' class='timer'> Bus is arriving in " + str(math.floor(time_taken*60)) + " minutes & " + str(math.ceil((time_taken - (math.floor(time_taken*60))/60)*3600)) + " seconds")
