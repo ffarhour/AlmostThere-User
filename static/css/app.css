@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+/*Author: Farmehr Farhour f.farhour@gmail.com*/
+body{
+	border:0;
+	padding:0;
+	margin:0;
+}
+.home{
+	background-color:#fcfcfc; 
+	height:516px; 
+	width:289px; 
+	margin:0px; 
+	padding:0px; 
+	top:0px;
+	background:url(../images/bg_Homescreen.jpg);
+}
+.nav{
+	background:url(../images/bg_page.jpg);
+	height:516px; 
+	width:289px; 
+	margin:0px; 
+	padding:0px; 
+	top:0px;
+}
+.timer{
+	background:url(../images/bg_page.jpg);
+	height:516px; 
+	width:289px; 
+	margin:0px; 
+	padding:0px; 
+	top:0px;
+}
+.text{
+	text-align:center;
+	text-shadow:#000;
+	font-family:Candara;
+	text-emphasis:center;
+}
+#moto.text{
+	font:Candara;
+	margin-bottom:45px;
+	padding-top:25%;
+	font-size:20px;
+	font-weight:500;
+}
+#titletext.text{
+	color:#FFF;
+	font-size:34px;
+	padding-top:10px;
+}
+#bodytext.text{
+	color:#FFF;
+	font-size:25px;
+}
+.logo{
+	text-align:center; 
+	margin:0; 
+	padding:0; 
+	border:0;
+}
+.buttons{
+	text-align:center;
+}
+.button{
+	text-align:center;
+	background:#3f084b; 
+	color:#FFFFFF; 
+	padding-top:10px; 
+	padding-bottom:10px; 
+	padding-right:10px; 
+	padding-left:10px; 
+	border:10px; 
+	border-radius:5px;
+	border-color:3f084b;
+	font:Calibri; 
+	font-size:20px;
+	cursor:pointer;
+}
+#verticallist{
+	height:100%;
+	overflow:hidden;
+	margin:0; 
+	padding:0;
+	margin-right:10%;
+	margin-left:10%;
+}
+
+	#verticallist li{
+		padding-top:4%;
+		padding-bottom:4%;
+		display:block;
+		background:#efefef;
+		color:#333;
+		border:none;
+		text-align:center;
+		font-size:16px;
+		font-weight:500;
+		font-family: Tahoma;
+		margin-top:2%;
+		margin-bottom:2%;
+		cursor:pointer;
+		overflow:hidden;
+		-webkit-box-shadow:0 1px 3px rgba(0,0,0, .4);
+	}
+	#verticallist li:hover
+	{
+	background-color:#370f44;
+	color:#fff;
+	} 

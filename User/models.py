@@ -46,6 +46,7 @@ class Route(models.Model):
 	"""
 	
 	Route_ID = models.CharField(default = -1, max_length = 20, unique = True)
+	short_name = models.CharField(default = None, max_length = 10)
 
 
 class Trip(models.Model):
@@ -58,6 +59,12 @@ class Trip(models.Model):
 	route = models.ForeignKey(Route)
 	
 	direction = models.IntegerField(default = -1)
+
+	def __eq__(self, other):
+		if self.TripID == other.TripID:
+			return True
+		else:
+			return False
 
 
 

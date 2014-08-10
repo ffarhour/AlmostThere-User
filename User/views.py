@@ -4,7 +4,10 @@ from django.http import HttpResponse
 from Core.Types.Prediction import Predictor
 from Core.Types import Point
 
-from User.models import Stop, Route, Shape_Point
+from User.models import Stop, Route, Shape_Point, Stop_Time
+
+from datetime import timedelta, datetime
+import math
 
 # Create your views here.
 
@@ -41,30 +44,46 @@ def ButtonNavTimer(request):
 	"""
 
 
-	# stopOne = Stop.objects.get(Stop_ID =  request.GET['stopOne'])
-	# stopTwo = Stop.objects.get(Stop_ID =  request.GET['stopTwo'])
-	route = Route.objects.get(Route_ID = request.GET['route'])
+	stopOne = Stop.objects.get(Stop_ID =  request.GET['firstStop'])
+	# stopTwo = Stop.objects.get(Stop_ID =  request.GET['secondStop'])
+	# route = Route.objects.get(Route_ID = request.GET['route'])
 
-	predictor = Predictor()
+	# predictor = Predictor()
 
 	#predictor.SetCurrentLocation(Point(stopOne.Latitude, stopOne.Longitude))
 	# predictor.SetDestination(Point(stopTwo.Latitude, stopTwo.Longitude))
 
-	shape_info = Shape_Point.objects.filter(route = route)
-	points_list = []
-	for shape in shape_info:
-		points_list.append(
-				Point(
-				Latitude = shape.Latitude,
-				Longitude = shape.Longitude
-					))
+	# shape_info = Shape_Point.objects.filter(route = route)
+	# points_list = []
+	# for shape in shape_info:
+	#	points_list.append(
+	#			Point(
+	#			Latitude = shape.Latitude,
+	#			Longitude = shape.Longitude
+	#				))
 
-	predictor.SetDestination(points_list[len(points_list)-1])
-	predictor.SetPath(points_list)
-	predictor.SetCurrentPosition(points_list[0])
-	arrival_time = predictor.Calculate(30)
+	trips = []
 
-	context = {'bus_time' : arrival_time}
+	for stop_time in Stop_Time.objects.filter(stop = stopOne):
+		if stop_time.time < (datetime.now() + timedelta(minutes=1)).time():
+			if stop_time.trip not in trips:
+				trips.append(stop_time.trip)
+			
+
+	#predictor.SetDestination(points_list[len(points_list)-1])
+	# predictor.SetPath(points_list)
+	# predictor.SetCurrentPosition(points_list[0])
+	# arrival_time = predictor.Calculate(30)
+				
+	route_list = []
+	for trip in trips:
+		if trip.route not in route_list:
+			route_list.append(trip.route)
+
+	context = {'route_list' : route_list,
+			'stop' : request.GET['firstStop']
+			}
+	
 
 	return render(request, "Timer.html", context)
 
@@ -72,5 +91,29 @@ def TimerData(request):
 	"""
 	For the TimerData
 	"""
-	context = []
-	return "Welcome"
+	predictor = Predictor()
+
+	route = Route.objects.get(Route_ID = request.GET['route_id'])
+	stopOne = Stop.objects.get(Stop_ID =  request.GET['stop'])
+	
+
+
+	shape_info = Shape_Point.objects.filter(route = route)
+	
+	points_list = []
+	for shape in shape_info:
+		points_list.append(
+				Point(
+					Latitude = shape.Latitude,
+					Longitude = shape.Longitude
+					))
+
+	predictor.SetPath(points_list)
+	predictor.SetCurrentPosition(points_list[0])
+	predictor.SetDestination(Point(
+		Latitude = stopOne.Latitude,
+		Longitude = stopOne.Longitude))
+
+	time_taken = predictor.Calculate(30)
+    
+	return HttpResponse("<div id='timer' class='timer'><div style='font-family: Tahoma;text-align:center; padding: 10px; color:#fff;  background:#370548; position:absolute; top:20%; width:100%; font-size:24px;'> Bus is arriving in<br />" + str(math.floor(time_taken*60)) + " minutes & " + str(math.ceil((time_taken - (math.floor(time_taken*60))/60)*3600)) + " seconds</div></div>")

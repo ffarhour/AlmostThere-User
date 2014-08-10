@@ -1,8 +1,49 @@
-TIMER
+{% load staticfiles %}
+<div class='Timer'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
 
-<div id="dataToShow">
+	var stop = '{{ stop }}';
 
-	Bus Arrival Time: {{ bus_time }}
+	$(document).ready(function(){
+		$('#dataToshow').hide();
+			});
 
+function sendRoute(routeId){
+	$('#routeList').hide(10);
+	
+	$.get('/User/TimerData/', { 'route_id' : routeId, 'stop' : stop}, function(data){
+		$('#dataToShow').html(data);
+			});
+	$('#timer').fadeIn(100);
+};
+</script>
 
+ <div id="dataToShow">
+ 		
+		{% if bus_arrival_time %}
+		<a>Bus is arriving at {{ bus_arrival_time }</a>
+		{% endif %}
+        
+        
+<div class="timer">
+
+	<div class="text" id="titletext">
+    		<a>Routes</a>
+	</div>	
+    <br />
+    
+  <div id="routeList">
+		{% if route_list %}
+			{% for route in route_list %}
+            <ul id="verticallist">
+				<li onclick='sendRoute("{{ route.Route_ID }}")'>{{ route.short_name }}</li>
+			</ul>
+			<!--<div style="text-align:center">
+			<button onclick='sendRoute("{{ route.Route_ID }}")' style="text-align:center; width:20%; border:0; padding:10px; cursor:pointer;">{{ route.short_name }}</button>
+			</div>-->
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>
 </div>

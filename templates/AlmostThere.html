@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Almost There</title>
+<link href="{% static 'css/app.css' %}" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
 <script>
 
 $(document).ready(function(){
@@ -31,8 +31,7 @@ function buttonNavTimer(data){
 	//$('#window').load('/User/ButtonNavTimer/', { 'firstStop' : $('#firstStop').val(),
 	//		'secondStop' : $('#secondStop').val()}
 	//		);
-	$.get('/User/ButtonNavTimer/', { "firstStop" :  $('#firstStop').val(), "secondStop" : $('#secondStop').val(),
-			"route" : $('#secondStop').val()}, function(data){
+	$.get('/User/ButtonNavTimer/', data , function(data){
 			$("#window").html(data);
 			});
 	$('#window').fadeIn(1000);
@@ -56,46 +55,58 @@ function NavLoc(){
 	buttonNavTimer(data);
 };
 
+//backbutton functions
+//$(function(){
+//	history.pushState({}, '', 'ButtonNavigation');
+//	return false;
+//  $(window).on("popstate", function(e) {
+//    if (e.originalEvent.state !== null) {
+//    	$('#NavPage').load('/User/AlmostThere/');
+//		$('#NavPage').fadeIn(1000);
+//    }
+//  });
+// Revert to a previously saved state
+//window.addEventListener('popstate', function(event) {
+  //console.log('popstate fired!');
+
+  //updateContent(event.state);
+	//});
+//});
+
+
+function clickHandler(e) {
+  // Add an item to the history log
+  history.pushState({}, 'Navigation', 'Navigation');
+
+  return event.preventDefault();
+}
+// Revert to a previously saved state
+window.addEventListener('popstate', function() {
+  console.log('popstate fired!');
+
+  	$('body, html').load('/User/AlmostThere/');
+	$('body, html').fadeIn(1000);
+});
+
+
 
 </script>
-
-<!--
-<script>
-function doSomethingHere()
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-  		{// code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlhttp=new XMLHttpRequest();
- 	 	}
-	else
-  		{// code for IE6, IE5
-  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  		}
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-    }
-  }
-} 
-</script> -->
 </head>
 
 <body>
-
-	<button  id='btnClick' onclick="doSomething()">Do Something Here </button>
-	<button id='ButtonNavigation', onclick="buttonNavigate()">Navigation Page</button>
-
-<div id="window" style='background:white;height:100%;'>
-	<div class="button">
-
-	
+<div class="home" id="window">
+	<div class="text" id="moto">
+    	<a>With Almost There,</a><br />
+        <a>you will never miss a bus again</a><br />
+    </div>
+	<div id='HomePage' class="logo">
+		<img src="{% static 'images/Logo_reflection.png' %}" id="mainlogo" width="110" />
 	</div>
-	<div id='HomePage' class="logo" style="text-align:center; margin-top:0px; margin-bottom:0px; padding:0px;" >
-	<img src="{% static 'images/Logo_reflection.png' %}" id="mainlogo" width="100" />
+    
+	<div class="buttons">
+		<button class="button" id='ButtonNavigation', onclick="buttonNavigate(); clickHandler()" title="GetStarted">GET STARTED</button><br />
+    	<!--<button  id='btnClick' onclick="doSomething()">Do Something Here </button>-->
 	</div>
-
 	
 
 	<!-- 

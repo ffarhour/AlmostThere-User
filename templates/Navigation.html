@@ -1,34 +1,72 @@
-
-<div id='NavPage'>
-
+<div class="nav" id='NavPage'>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script>
-		
-
+<script>
 function NavLoc(){
 	
 	data = {
-			"firstStop" : $('#firstStop').val(),
-			"secondStop" : $('#secondStop').val()
+			"firstStop" : $('#firstStop').val()
+			// "secondStop" : $('#secondStop').val()
 		};
 	buttonNavTimer(data);
 };
 
+////backbutton functions
+//$(function(){
+//	history.pushState({}, '', 'ButtonNavigation');
+//	return false;
+//  $(window).on("popstate", function(e) {
+//    if (e.originalEvent.state !== null) {
+//    	$('#NavPage').load('/User/AlmostThere/');
+//		$('#NavPage').fadeIn(1000);
+//    }
+//  });
+//// Revert to a previously saved state
+////window.addEventListener('popstate', function(event) {
+//  //console.log('popstate fired!');
+//
+//  //updateContent(event.state);
+//	//});
+//});
+function clickHandler(e) {
+  // Add an item to the history log
+  history.pushState({}, 'Navigation', 'Navigation');
 
-	</script>
+  return event.preventDefault();
+}
+// Revert to a previously saved state
+window.addEventListener('popstate', function() {
+  console.log('popstate fired!');
 
-<h2 style='font-family:Helvetica' > Use This Page to navigate to the location </h2>
+  	$('body, html').load('/User/AlmostThere/');
+	$('body, html').fadeIn(1000);
+});
 
-<h3>Stop</h3>
-<input id="firstStop" type='text'>
+</script>
+    
+    
+<div class="text" id="titletext">
+	<a> My Journey</a>
+</div>
+
+<!-- 
+<div class="text" id="Explanation"
+	<a> Please enter your stop numbers </a>
+</div>
+
+--> 
+<div class="text" id="bodytext">
+	<a><input id="firstStop" style="height:35px;border:10px; border-radius:5px;margin-top:100px; padding:10px;" type='text' placeholder="Enter your stop number"></a>
+	<!-- <a style="margin-right:20px;">B <input id='secondStop' style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text'placeholder="Enter Your Destination"></a> -->
+</div>
 <br />
-<h3>to Stop</h3>
-<input id='secondStop' type='text'>
 
-<br />
-<br />
-<input id='NavigateToLocation' type='submit' onclick="NavLoc();">
+<!-- 
+	<a style="margin-right:20px;">Stop Number <input id="firstStop" style="height:35px;border:10px; border-radius:5px;margin-top:50px; padding:10px;" type='text' placeholder="Starting stop"></a><br /> -->
 
+
+<div class="buttons">
+	<input class="button" id='NavigateToLocation' type='submit' onclick="NavLoc();" style="color:#000000; background-color:#FFFFFF; margin-top:100px;" value="FIND">
+</div>
 </div>
 
