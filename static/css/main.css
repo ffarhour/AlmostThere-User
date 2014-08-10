@@ -43,3 +43,19 @@ body{
 	margin-left:65px;
 	border:0;
 }
+
+/*
+ * Shorya Raj rajshorya@gmail.com 11/8/2014
+ * Addition for the guidetext
+ */
+.guideText{
+	font-family:Candara;
+	margin-left:5%;
+	margin-top:5%;
+	font-weight: bold;
+	color: #FFFFFF;
+	position:absolute;
+	width: 20%;
+  
+  	text-align: justify;
+}
