@@ -55,39 +55,13 @@ function NavLoc(){
 	buttonNavTimer(data);
 };
 
-//backbutton functions
-//$(function(){
-//	history.pushState({}, '', 'ButtonNavigation');
-//	return false;
-//  $(window).on("popstate", function(e) {
-//    if (e.originalEvent.state !== null) {
-//    	$('#NavPage').load('/User/AlmostThere/');
-//		$('#NavPage').fadeIn(1000);
-//    }
-//  });
-// Revert to a previously saved state
-//window.addEventListener('popstate', function(event) {
-  //console.log('popstate fired!');
-
-  //updateContent(event.state);
-	//});
-//});
-
-
-function clickHandler(e) {
+//back + home button functions
+function GetStartedButton() {
   // Add an item to the history log
   history.pushState({}, 'Navigation', 'Navigation');
 
   return event.preventDefault();
-}
-// Revert to a previously saved state
-window.addEventListener('popstate', function() {
-  console.log('popstate fired!');
-
-  	$('body, html').load('/User/AlmostThere/');
-	$('body, html').fadeIn(1000);
-});
-
+};
 
 
 </script>
@@ -104,7 +78,7 @@ window.addEventListener('popstate', function() {
 	</div>
     
 	<div class="buttons">
-		<button class="button" id='ButtonNavigation', onclick="buttonNavigate(); clickHandler()" title="GetStarted">GET STARTED</button><br />
+		<button class="button" id='ButtonNavigation', onclick="buttonNavigate(); GetStartedButton()" title="GetStarted">GET STARTED</button><br />
     	<!--<button  id='btnClick' onclick="doSomething()">Do Something Here </button>-->
 	</div>
 	

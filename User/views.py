@@ -116,4 +116,4 @@ def TimerData(request):
 
 	time_taken = predictor.Calculate(30)
     
-	return HttpResponse("<div id='timer' class='timer'><div style='font-family: Tahoma;text-align:center; padding-left: 0px; padding-right: 0px; padding-top: 10px; padding-bottom:10px; color:#fff;  background:#370548; position:absolute; top:20%; left:0%; width:291px; font-size:22px;'> Bus is arriving in<br />" + str(math.floor(time_taken*60)) + " minutes & " + str(math.ceil((time_taken - (math.floor(time_taken*60))/60)*3600)) + " seconds</div></div>")
+	return HttpResponse("<script>window.addEventListener('popstate', function() {$('body, html').load('/User/ButtonNavigation/'); $('body, html').fadeIn(1000);});</script><div id='timer' class='timer'><div style='font-family: Tahoma;text-align:center; padding-left: 0px; padding-right: 0px; padding-top: 10px; padding-bottom:10px; color:#fff;  background:#370548; position:absolute; top:20%; left:0%; width:291px; font-size:22px;'> Bus is arriving in<br />" + str(math.floor(time_taken*60)) + " minutes & " + str(math.ceil((time_taken - (math.floor(time_taken*60))/60)*3600)) + " seconds</div></div>")

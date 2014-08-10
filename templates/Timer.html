@@ -17,6 +17,23 @@ function sendRoute(routeId){
 			});
 	$('#timer').fadeIn(100);
 };
+
+//back + home button functions
+// Revert to a previously saved state
+window.addEventListener('popstate', function() {
+  console.log('popstate fired!');
+
+  	$('body, html').load('/User/ButtonNavigation/');
+	$('body, html').fadeIn(1000);
+});
+
+function clickHandler() {
+  // Add an item to the history log
+  history.pushState({}, 'ButtonNavTimer2', 'ButtonNavTimer2');
+
+  return event.preventDefault();
+};
+
 </script>
 
  <div id="dataToShow">
@@ -37,7 +54,7 @@ function sendRoute(routeId){
 		{% if route_list %}
 			{% for route in route_list %}
             <ul id="verticallist">
-				<li onclick='sendRoute("{{ route.Route_ID }}")'>{{ route.short_name }}</li>
+				<li onclick='sendRoute("{{ route.Route_ID }}");clickHandler()'>{{ route.short_name }}</li>
 			</ul>
 			<!--<div style="text-align:center">
 			<button onclick='sendRoute("{{ route.Route_ID }}")' style="text-align:center; width:20%; border:0; padding:10px; cursor:pointer;">{{ route.short_name }}</button>

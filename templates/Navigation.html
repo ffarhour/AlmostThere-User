@@ -1,5 +1,6 @@
+{% load staticfiles %}
 <div class="nav" id='NavPage'>
-
+<link href="{% static 'css/app.css' %}" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
 function NavLoc(){
@@ -11,36 +12,21 @@ function NavLoc(){
 	buttonNavTimer(data);
 };
 
-////backbutton functions
-//$(function(){
-//	history.pushState({}, '', 'ButtonNavigation');
-//	return false;
-//  $(window).on("popstate", function(e) {
-//    if (e.originalEvent.state !== null) {
-//    	$('#NavPage').load('/User/AlmostThere/');
-//		$('#NavPage').fadeIn(1000);
-//    }
-//  });
-//// Revert to a previously saved state
-////window.addEventListener('popstate', function(event) {
-//  //console.log('popstate fired!');
-//
-//  //updateContent(event.state);
-//	//});
-//});
-function clickHandler(e) {
-  // Add an item to the history log
-  history.pushState({}, 'Navigation', 'Navigation');
 
-  return event.preventDefault();
-}
-// Revert to a previously saved state
+
 window.addEventListener('popstate', function() {
   console.log('popstate fired!');
 
   	$('body, html').load('/User/AlmostThere/');
 	$('body, html').fadeIn(1000);
 });
+
+function findButton() {
+  // Add an item to the history log
+  history.pushState({}, 'ButtonNavTimer', 'ButtonNavTimer');
+
+  return event.preventDefault();
+};
 
 </script>
     
@@ -66,7 +52,7 @@ window.addEventListener('popstate', function() {
 
 
 <div class="buttons">
-	<input class="button" id='NavigateToLocation' type='submit' onclick="NavLoc();" style="color:#000000; background-color:#FFFFFF; margin-top:100px;" value="FIND">
+	<input class="button" id='NavigateToLocation' type='submit' onclick="NavLoc();findButton();" style="color:#000000; background-color:#FFFFFF; margin-top:100px;" value="FIND">
 </div>
 </div>
 
