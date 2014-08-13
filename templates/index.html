@@ -8,16 +8,50 @@
 <title>Frontend User</title>
 <link rel="shortcut icon" href="{% static 'images/AT_favicon.ico' %}" />
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
+<script>
+function goHome(){
+	location.reload();
+};
+</script>
 </head>
 
 <body>
+
+<div class='guideText'>
+	
+	<h1 style='text-align:left':>
+		Welcome to the AlmostThere demo application. </h1>
+	<br />
+
+	<h3> This application shows the functional aspects of the connection between AT data and Almost There's backend. It uses the information currently provided through Auckland Transport's API.
+
+		<!--
+	<p>
+	To use this application: <br /> 
+	1. Click on Get Started <br />
+	2. Enter the stop number that you want to start from <br />
+	3. Click on one of the returned routes that are going to arrive at the stop. <br />
+	<br />
+	You should be returned the arrival time for the bus to that stop. <br />
+
+	</p> -->
+		<ol>
+			<li>Click on Get Started </li>
+			<li>Enter the stop number that you want to start from (e.g. 0026).</li>
+			<li>This will display a list of routes that will arrive at your chosen stop.</li>
+			<li>Select a route to find when the next bus will arrive</li>
+		</ol>
+
+</div>
+
+
 <div class="phone">
 	<img src="{% static 'images/phone.png' %}" height="700" align="middle" style="z-index:0;" />
 	<div class="screen">
     	<iframe name="myframe" id="myframe" width="289" height="516" src="/User/AlmostThere/" frameborder="0" allowTransparency="true" align="middle" style="z-index:10" seamless="seamless" scrolling="no">
       		Your browser does not support inline frames.</iframe><br />
         <button class="button" id='backbutton', onclick="myframe.history.back()"></button>
-        <button class="button" id='homebutton', onclick=""></button>
+        <button class="button" id='homebutton', onclick="goHome();"></button>
     </div>
     
 </div>
