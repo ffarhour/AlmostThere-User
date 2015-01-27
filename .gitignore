@@ -3,3 +3,7 @@ db.sqlite3
 *.pyc
 frontend-user.v12.suo
 ;
+build
+Core/source/build
+.ropeproject
+User.egg-info

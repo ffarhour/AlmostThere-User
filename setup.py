@@ -8,5 +8,5 @@ setup(
 		name = "User",
 		packages=find_packages(),
 		include_package_data=True,
-		install_requires =['Django>=1.7']
+		install_requires =['Django']
 		)
