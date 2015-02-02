@@ -7,3 +7,6 @@ build
 Core/source/build
 .ropeproject
 User.egg-info
+User/migrations/0013_auto_20150202_2253.py
+User/migrations/0014_auto_20150202_2254.py
+User/migrations/0015_auto_20150202_2258.py
