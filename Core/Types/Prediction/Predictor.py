@@ -6,8 +6,9 @@ import math
 
 from Core.Types import Point
 
-from Core.Functions.Geographic.Coordinate import Distance_LatLongs, ToGeo, ToCartesian
-from Core.Functions.Math.Interpolation import Interpolate_Linear, Interpolate_Linear_3Points
+#FIXME: The following imports throw DLL import errors. Most probably an issue with the Libraries and how they were installed
+#from Core.Functions.Geographic.Coordinate import Distance_LatLongs, ToGeo, ToCartesian
+#from Core.Functions.Math.Interpolation import Interpolate_Linear, Interpolate_Linear_3Points
 
 class Predictor:
 	"""
